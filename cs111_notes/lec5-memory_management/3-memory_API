@@ -1,0 +1,19 @@
+MEMORY API
+
+Stack memory is managed by the compiler, and is sometimes called automatic memory.
+Heap memory is handled by the user. It's more useful, but more prone to bugs.
+
+void* malloc(size_t size);
+	Allocate space on the heap!
+	Ex: malloc(sizeof(int));
+	Aside: sizeof() is an operator, not a function call, since the size is already known, while function calls take place at runtime.
+	Remember to free() when you're done.
+
+Errors:
+	-Forgetting to allocate memory
+	-Not allocating enough memory - buffer overflow
+	-Forgetting to initialize allocated memory
+	-Forgetting to free memory - memory leak
+	-Freeing memory before you're done with it - dangling pointer
+	-Freeing repeatedly - double-free
+	-Freeing non-pointers

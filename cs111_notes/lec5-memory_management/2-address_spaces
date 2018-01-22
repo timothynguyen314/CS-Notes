@@ -1,0 +1,13 @@
+ADDRESS SPACES
+
+In the early days, the OS was a bunch of libraries and a program would use the rest of memory.
+With multiprogramming, we couldn't switch entire full memories, we had to let processes share memory, and thus protection between processes became an issue.
+
+"code" of a program is in memory. "stack" of local variables is in memory. "heap" of dynamically allocated data is in memory.
+The code is static and doesn't grow.
+The heap and stack both grow.
+
+We want to virtualize memory.
+We want transparency, something that is easy to understand and feels like we're directly using memory.
+We want efficiency.
+We want protection/isolation.

@@ -1,0 +1,47 @@
+CONDITION VARIABLES
+
+We want a condition to be met before using our lock, such as a parent wanting its child to finish before resuming.
+We don't want to waste spin cycles, so we want to put the parent thread into sleep until the condition is met.
+
+A condition variable is a queue threads put themselves on until a condition is met.
+Two operations:
+	wait() - go into sleep
+	signal() - wake up a sleeping thread
+
+int done = 0;
+pthread_mutex_t m = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t c = PTHREAD_COND_INITIALIZER;
+
+void thr_exit(){
+	pthread_mutex_lock(&mutex);
+	done = 1;
+	pthread_cond_signal(&c, &m);
+	pthread_mutex_unlock(&mutex);
+}
+
+void thr_join(){
+	pthread_mutex_lock(&m);
+	while(done == 0)
+		pthread_cond_wait(&c, &m);
+	pthread_mutex_unlock(&m);
+}
+
+Notice how the wait is inside a loop.
+If the child calls signal() first before the parent calls join(), when the parent calls join() it will call wait() and wait endlessly because the signal passed.
+
+The Producer/Consumer or Bounded Buffer Problem
+	Producer threads generate items and place them in a buffer for consumer threads to collect.
+	A pipe works like that, with producers outputting the input consumers take.
+	The bounded buffer is a shared resource.
+
+	We'd use a variable like done to make sure the buffer is being empty or not.
+	If it's empty, a consumer thread will wait until a producer thread signals that the buffer is filled.
+
+Covering Conditions
+	A thread waits for memory to be free before allocating.
+	A thread also signals that more memory is free when it's done with its allocation.
+
+	What if a thread requests 100 bytes before a second thread requests 10 bytes, when 0 bytes are available?
+	When 10 bytes are available, the signal will go to the first thread and fail.
+	
+	pthread_cond_broadcast() will try to wake up all sleeping threads. Only downside is performance.

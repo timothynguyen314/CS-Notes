@@ -1,0 +1,48 @@
+INTRO TO OS
+
+The Operating System (OS) performs complex operations while hiding its complexity.
+	-Memory management, persistent storage, scheduling/synchronization, interprocess communications, security
+
+Services are objects + operations, interface + implementations (data structures).
+
+The OS manages and abstracts hardware.
+	applications -> libraries -> OS -> hardware
+
+		applications interact w/ library through the application binary interface (ABI)
+		libraries interact w/ OS through system call interface
+
+		applications and libraries interact w/ hardware through standard instruction set
+		OS interacts w/ hardware through priveleged instruction set
+
+	The OS alone has complete access to hardware. It is loaded right when the hardware turns on. If it crashes, so does everything else.
+
+Instruction Set Architecture (ISA)
+	-Determines what bit patterns correspond to what operations
+	-The CPU goes into a special mode to do priveleged instructions as opposed to general.
+
+	The ISA, the I/O devices, and other functionality beyond user mode instructions collectively determine the "platform" the OS runs on.
+	An OS should be able to run on multiple ISA's, on multiple machines.
+
+Binary Distribution Model
+	A binary distribution is ready to run when given. A source distribution must be compiled first. The binary distribution is more accessible, since people might not be competent enough to build the source, and we also might not want to give out the source as well.
+
+	Binary Configuration model = automatic hardware discovery, automatic resource allocation. Much easier than manual static configuration.
+
+The Application Programming Interface (API) and the Application Binary Interface (ABI) promise what will be done. Upwards compatibility means that old stuff will be retained in new versions.
+The OS is flexible due to policy/mechanism separation, dynamically loadable features, and feature independence/orthogonality.
+We should only add stuff to the OS if it requires priveleged instructions, maintains security, or manipulates OS data structures.
+
+Types of Resources:
+	Serially Reusable Resources
+		-multiple clients, one at a time
+		-access control ensures exclusive use
+		-graceful transitions make sure resource looks brand new/untouched when you use it
+	Partitionable Resources
+		-multiple clients using different pieces
+		-access control ensures containment within your space and privacy of your space
+		-needs graceful transitions
+		-RAM is an example
+	Shareable Resources
+		-no one waits or owns a resource
+		-"limitless"
+		-no graceful transitions

@@ -1,0 +1,47 @@
+MORE SCHEDULING
+
+workload - all running proceses, aka jobs. Know your wokrload before making a fully operational scheduling discipline.
+
+Let's make assumptions:
+	1)jobs run for same amount of time
+	2)jobs arrive at same time
+	3)jobs start then run to completion
+	4)jobs only use CPU (no I/O)
+	5)runtime of jobs are known
+
+Scheduling metric - something to measure to evaluate scheduling
+For now, let's focus on "turnaround time" - time from arrival to finish
+This is a performance metric, as opposed to a fairness metric.
+
+Policy #1: First In First Out (FIFO)
+	We have 3 processes that take 10 seconds each.
+	Average turnaround time: (10+20+30)/3 = 20
+
+	But what if they're not the same amount of time?
+	FIFO is terrible if large ones come first, the convoy effect.
+
+Policy #2: Shortest Job First (SJF)
+	Seems to fix the convoy effect if big and small jobs arrive at the same time.
+
+	But what if a big job arrives before the small one? We get the convoy effect again.
+
+Before, schedulers were non-preemptive, and would start and run to completion. Today, all are pre-emptive and willing to interrupt and do a context switch in the middle of a process.
+
+Policy #3: Shortest Time to Completion First (STCF)
+	If a short one arrives after a big one is running, and will finish before the big one does, we can preempt to stop the big and let the small one finish first.
+
+Now let's add a new metric: "response time" - time from arrival to scheduling.
+The previous policies are terrible for response time.
+
+Policy #4: Round Robin (RR)
+	Run a job for a time slice/scheduling quantum, then switch to another one for the same slice.
+
+	Response time is good.
+	Too many context witches - amortizaton - is when costs outweigh benefits.
+	Awful turnaround time. In fact, the worst.
+
+Now let's say programs do I/O in addition to using CPU.
+A process can't use the CPU during I/O. It's blocked, waiting to finish I/O.
+So when it does I/O, another process takes it place: overlap.
+
+Assuming we know the runtimes of processes was actually the worst assumption.

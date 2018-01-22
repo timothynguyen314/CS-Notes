@@ -1,0 +1,31 @@
+LIMITED DIRECT EXECUTION
+
+Challenges of time sharing - performance vs retaining control of the CPU
+
+"limited direct execution"
+	run a process directly on the CPU for performance benefits
+	to retain control, we divide the processor into user and kernel modes.
+
+We use a system call to go into kernel mode.
+A system call executes a trap to get into the kernel. A return-from-trap is used to go back.
+	-Save registers onto the kernel stack before going to kernel
+	-Set up a "trap table" that says what code to run when what interrupts occur. Set it up at boot time.
+		-It should also have locations of trap handlers, so that we know where to return to in user mode, instead of having user mode telling us where to return.
+		-The operation that tells hardware where a trap table is, is a priveleged operation.
+User mode accesses system calls via system call #s. They don't know the actual addresses of system calls.
+
+Switching between processes?
+How does the OS regain control of the CPU so it can switch between processes?
+
+"cooperative approach"
+	Trust processes to behave normally and give up control of CPU eventually.
+	the yield() system call will give control back to the OS.
+
+non-cooperative approach: "timer interrupts"
+	If a process takes too long/stuck in infinite loop, an interrupt handler will let the OS regain control.
+
+"context switch"
+	save registers and PC to kernel stack so we can restore them after leaving the kernel
+	If we want to switch processes while in the kernel, we'd switch kernel stacks.
+		The user registers are saved by hardware
+		The kernel registers when switching stacks are saved by the OS

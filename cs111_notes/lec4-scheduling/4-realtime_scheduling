@@ -1,0 +1,10 @@
+REAL-TIME SCHEDULING
+
+A real-time system is one whose correctness depends on functionality and timing.
+
+static scheduling - define a schedule at build time when given a list of all tasks
+dynamic scheduling - in the moment
+
+Preemption is not favorable in real-time systems.
+It causes tasks to miss deadlines.
+Also such systems usually run fewer and simpler tasks, so infinite loops are rare.

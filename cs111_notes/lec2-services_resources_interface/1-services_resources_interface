@@ -1,0 +1,88 @@
+Services, Resources, and Interface
+
+Types of Abstractions
+	CPU/Memory - processes/threads, virtual address space
+	Persistent storage - file system
+	I/O - windows, signals, sockets, pipes
+
+How to use OS services
+	-Subroutines
+	-System calls
+	-Sending messages to software
+
+Subroutines
+	These are like function calls. You push parameters, jump to the subroutine, and the return values are found in stack registers.
+	This is high layer, while hardware would be low layer. Very fast.
+	All services are in the same address space.
+	No priveleged instruction set.
+	Hard to combine different languages.
+
+	Libraries are a subroutine
+		Object modules that can be used w/o recompilation
+		Encapsulate complexity.
+
+		Static - link time
+		Shared - exec time
+		Dynamic - run time
+
+		Static - We're putting the entire library in. Very large. Changing library means needing to relink it into the load module.
+		Shared - All programs share one library. Can be updated w/o updating the programs. The routines must be known at compile time, unlike dynamic.
+
+System Calls
+	100-1000x slower than subroutines.
+	Force entry into OS and get priveleged resources.
+
+	kernel - contains stuff that requires privelege
+		-allocating physical resources
+		-privacy of processes
+		-security of resources
+
+Service Delivery via messages
+	Make system calls to a server anywhere on earth.
+	1000-100000x slower than subroutines.
+
+Application Programming Interface
+	Compile for an ISA, and it will run.
+	If a program works w/ an API, any system supporting the API supports the program.
+	Users want this, so they don't have to compile or debug.
+
+Middleware is part of the application/platform. It is not part of the OS.
+ISAs are hardware specific
+API and ABI are OS specific.
+All libraries are called through API. (dynamically loading requires ABI)
+
+If the interface fails, all programs using it fails.
+
+Memory Abstractions
+	-variables, files, read, write
+
+	Do we want persistent or transient memory? How big should it be? Latency/delays in transferring data? Is memory being shared?
+	Coherence - expecting a file to remain changed after changing it.
+
+	Abstracting the hard drive
+		-What operations? And where on the disk?
+		-Optimizations are made with caches and read-ahead
+		-How to handle failures?
+
+Processor Abstractions
+	Interpreter - something that performs commands.
+
+	Instruction reference - what to do
+	Repertoire - what the processor can do
+	Environment reference - state for an instruction
+	Interrupts - if instructions are overwritten
+
+	Many processes share a CPU, so a scheduler handles them.
+
+Communications Abstractions
+	How interpreters talk to each other: cables, remote servers
+	Send/Receive
+	A socket is an example
+
+Federation framework deals with making a common unifying model, like PDFs, by creating a single interface that all must meet. This might be too limiting due to having to cater to the least common denominator.
+
+We often layer our abstractions
+	-good modularity
+	-performance penalties when jumping between layers due to extra instructions
+	-lower layers restrict higher layers
+

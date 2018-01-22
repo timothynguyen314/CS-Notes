@@ -1,0 +1,46 @@
+POLICIES
+
+What if memory is not free?
+With memory pressure, we need to start "paging out" or "evicting".
+What is the "replacement policy"?
+Memory can be seen as a cache for all the pages on the system.
+Let's reduce cache misses and increase cache hits.
+
+"average memory access time" for a program is (cost of hit * probability of hit) + (cost of miss * probability of miss)
+Cost of miss is much much higher, so it's better to reduce misses than to increase hits.
+
+optimal replacement policy - evict page that will be accessed furthest in the future.
+This is the most perfect policy, but we don't know the future.
+
+FIFO
+	This first policy is bad b/c it doesn't take into account that some blocks are more important than others.
+Random
+	The effectiveness is based on luck.
+Least Frequently Used/Least Recently Used
+	These operate on the principle of locality and work much better
+
+If we have a workload w no locality (purely random), FIFO, random, and LRU all work exactly the same.
+If we have a 80-20 workload (80% of references are 20% of pages) LRU works best.
+If we do a looping sequential workload (access 50 pages in same order over and over again), if cache has a size of 49 or lower, LRU and FIO do terribly with 0% rates, while random does best
+
+How to implement these policies?
+	Requires updating a data structure w every memory reference, like a time field for LRU.
+	But this field can get super big, and scanning for the LRU can be expensive.
+	Thus we approximate.
+
+	Every page has a use bit/reference bit. If it is used/referenced, the bit is set to 1.
+	A "clock algorithm" arranges pages in a circle, with the most recently used one directly behind the clock hand.
+	Find the closest one w a 0 use bit.
+	Go in a circle like a clock.
+	Sometimes we might use the dirty/modified bit instead.
+
+When do we bring a page into memory?
+page selection policy
+	demand paging - when it is accessed
+	prefetching - guess that it'll be used in the future
+	clustering - multiple writes together is much faster than individually
+
+What happens when the demands of processes exceed memory?
+	thrashing - constantly page
+	Admission control - run a subset efficienty, instead of everything poorly
+	Out of memory killer - killl the memory intensive processes

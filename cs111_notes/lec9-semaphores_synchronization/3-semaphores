@@ -1,0 +1,15 @@
+Semaphores
+	Invented by Edsger Dijkstra
+	An integer value we can manipulate w two operations: sem_wait() and sem_post()
+	A negative semaphore is equal to the number of waiting threads
+
+	#include<semaphore.h>
+	sem_t s;
+	sem_init(&s, 0, 1); //initialized to 1, the 0 indicates that the semaphore is shared by all threads in the same process
+
+	sem_wait() returns right away if the semaphore is 1 or higher
+	or it suspends execution until sem_post() is called
+
+	sem_post() increments a semaphore and, if a thread is waiting to be woken up, does so
+
+Binary semaphore

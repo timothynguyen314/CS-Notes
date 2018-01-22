@@ -1,0 +1,32 @@
+MORE INTRO TO OS
+
+Von Neumann model - A processor fetches an instruction from memory, decodes it, then executes it.
+
+The Operating System (OS) controls everything. Three big topics:
+	Virtualization - makes the physical computer easy to understand.
+		Making a single processor seem like many is a virtualization.
+		The virtual address space, physical memory with its reads and writes, is a virtualization.
+	Concurrency is second topic.
+	Persistence is third topic.
+		Storing data persistently via file system by using system calls provided by standard library.
+
+Design Goals:
+	Abstraction - easy to understand
+	Performance - minimize overhead
+	Protection - isolation of applications
+	Energy Efficiency, Mobility, etc.
+
+History:
+	batch processing - OS was libraries. A human would manage everything, act as the modern OS.
+
+	Soon system calls were developed, separating user and kernel modes. Traps would initiate system calls.
+	With minicomputers, more people started getting computers.
+	Multiprogramming eventually came about.
+	With personal computers, everybody had a computer.
+
+Unix
+	A shell is where you type commands.
+	It provided a compiler for the C language.
+	It combined small programs.
+	
+	Linux, derived from Unix, is widely used today.

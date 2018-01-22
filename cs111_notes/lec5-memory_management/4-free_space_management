@@ -1,0 +1,41 @@
+FREE SPACE MANAGEMENT
+
+The data structure of the heap is a "free list" w references to all the free chunks of space in a list.
+
+"external fragmentation"
+	There is no single space big enough to fit a piece. But overall the total available space is big enough to fit the piece.
+"internal fragmentation"
+	Allocating too much space for a unit when unneedd.
+
+We're gonna assume there's no compaction, or reallocation.
+
+"Splitting and Coalescing"
+	splitting - finding a space that fits, split in two, one should be free and the other used
+	coalescing - when freeing space, coalescing empty spaces together into one
+
+free() doesn't take a size parameter, because each memory entry should have a "header block" with size info, and a magic # for security checking.
+
+the sbrk() command grows the heap when we run out of space.
+
+Best Fit Strategy
+	Find all sizes that fit, choose the smallest one.
+	It's expensive to have to find all sizes though.
+Worst Fit Strategy
+	Find all sizes that fit, choose the biggest one to avoid having a bunch of tiny holes that don't fit anybody.
+	Also expensive to do a full search.
+First Fit Strategy
+	Speedy, but pollutes the beginning of the list.
+Next Fit Strategy
+	Start from last insertion and do a first fit.
+	Speedy and no pollution.
+
+"segregated lists" - if a certain app repeatedly requests one size, make a list just for it, to reduce fragmentation
+
+object caches are used as lists of memory. When they fill up, a slab allocator gives more space. caches are initialized when the machine boots, to reduce overhead.
+
+Buddy Allocation
+	Memory is size 2^n
+	divide by 2 until a space big enough fits
+	coalescing becomes easy
+	addresses differ by 1 bit of buddies within 2^n block
+	has some internal fragmentation

@@ -1,0 +1,41 @@
+LINKING AND LIBRARIES
+
+Source module - a C file that can be compiled into machine language
+Relocatable Object module - compiled source module, but not a complete program
+Libraries - collections of object modules that can be called by source
+Load module - complete program, ready to load (with OS) and execute (on CPU)
+
+Compiler makes assembly language
+Assembler makes machine language
+	Sometimes developers write in assembly language if we want performance critical data structure manipulations, calls into OS, CPU initialization, trap handlers, synchronization
+Linker/Linkage editor organizes load module in virtual address space. It resolves al the references by searching libraries.
+Program Loader, part of OS, creates a virtual address space, reading instructions and data into it, and loads shared libraries as well.
+
+We break up a program into object modules. It's simple, and lets us reuse the code we want.
+
+The search order of libraries is important if one library calls the other.
+
+Load modules still have a symbol table, in case a symbol wasn't resolved and mapped already by accident.
+
+Static Libraries
+	wasterful and slow, frozen version that can't be changed unless re-linked.
+
+Shared libraries
+	Held at an address
+	A stub library defines symbols and works with a redirection table for accessing code
+	A single version at load time
+	Programs not affected by the size of the library
+	Read-only code, no static data
+	No static calls or referencing global variables in client program
+	acts like static, unlike dynamic, which is more work
+
+Dynamically loaded libraries
+	Used if the library is super large, and loading would take time
+	App asks for DLL, OS provides address space for binding at service entry points
+	Use stuff that wasn't implemented at time of loading.
+	Unload when done, even if process isn't done.
+
+	Implicitly Loaded DLL
+		a Program Linkage Table is made in load module
+		Calling an entry in the PLT calls a runtime loader to load a DLL
+		A PLT entry now points to a DLL and calling it acts exactly like static/shared

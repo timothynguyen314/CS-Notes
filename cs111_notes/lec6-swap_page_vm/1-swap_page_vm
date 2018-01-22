@@ -1,0 +1,114 @@
+SWAPPING, PAGING, and VIRTUAL MEMORY
+
+Swapping
+	When we don't have enough RAM, we keep some on the disk.
+	Expensive context switches.
+
+	Swap space is the secondary storage where pages reside when not in memory.
+
+	How to swap?
+		Swap all pages in? Too many pages.
+		Demand swap pages in as they're needed? Has page faults.
+		Swap in last working set? Nice.
+
+Paging
+	Divide physical memory into fixed size pieces called page frames.
+	There should a page translation for virtual address page frames into physical address page frames.
+
+	Paging shouldn't have any external fragmentation.
+	It can have some internal fragmentation in the last page of its segment.
+	Paging is thus much less wasteful than segment fragmentation.
+
+Memory Management Unit (MMU)
+	Does the virtual to physical page translation, and does it quickly.
+	
+	Part of the Virtual Address contains the index in the page table
+	The page table contains a page # that is part of the Physical Address.
+	Part of both the Virtual and Physical addresses is an offset.
+
+	MMUs used to sit between the CPU and the bus.
+	Now they are integrated into the CPU.
+
+	Page tables used to be in registers.
+	But because memory today is huge, so they are in memory.
+	But we can't use 2 bus cycles (look up, get data) for every memory access.
+	So we use MMU registers as cache.
+
+Multiple Processes
+	Each process gets its own set of pages, their own page table.
+	A priveleged instruction points to the new page table and flushes previous cached entries.
+	Different tables could point to the same physical page table, but can only be read or read/write sharing.
+
+Demand Paging
+	A process doesn't actually need all its pages in memory, just the ones it references.
+	So we should only load the ones it references.
+	And we should only remove pages when a process yields if we need to.
+
+	Thus an entire process doesn't need to be present all at once.
+
+	Performance is compromised if memory references require disk access, so we need to make sure all memory references are already there.
+	Primarily focus on "locality of reference". Future instructions will most likely be nearby instructions or recently used ones (in stack and heap).
+
+Page Faults
+	If the page is out on disk and not on RAM.
+
+	Enter kernel.
+	Page fault handler schedules I/O to find page while blocking process.
+	Put page in page table.
+	Retry in user mode.
+
+	Page faults don't affect correctness, only speed, and thus no program crashes because of a page fault.
+	Overhead is directly proportional to page faults.
+
+	We can't control what pages we read in--we control what we kick out.
+
+Virtual Memory
+	An abstraction of memory that is very large, directly accessible, just as speedy as RAM.
+	We give each process a huge address space (when we really don't have that much space), and support it with dynamic paging and swapping.
+
+	We want every page we access to be in memory when we access it.
+	We accomplish this by relying on locality of access.
+
+Page Replacement
+	How do we choose which one to kick out?
+	Choose the Least Recently Used (LRU). This is better than Random, FIFO, Least Frequently Used.
+
+	A naive LRU would timestamp everything and look for the oldest timestamp.
+	We can't store or search for timestamps.
+
+	Clock Algorithm
+		Organize pages in a circular list.
+		MMU sets reference bit for page on access.
+		If we need another page, ask if a page has been referenced.
+			If so, dereference then skip.
+			If not, kick out.
+		Continue from where last left off.
+
+	Multiprogramming
+		We don't want to clear page frames when switching processes.
+
+		Single global pool?
+			Bad because processes don't use the same pages usually.
+		Fixed allocation of page frames per process?
+			Bad because processes are different.
+		Working set-based page frame allocations?
+			This dynamic allocation works best.
+			We allocate based on use in past, observing page fault rates, and just enough to avoid huge number of page faults.
+			We steal from processes that don't reference often.
+
+	If a page is shared by multiple processes, we're gonna need something else. A global pool is probably better for shared processes.
+
+Thrashing
+	If we don't have enough memory to support the size of our working sets, if pages are greater than memory, we'll get lots of page faults.
+	All processes run slow.
+
+	We can't reduce working set sizes as that causes more thrashing
+	We could reduce number of processes, and round robin in and out processes.
+
+Clean vs Dirty Pages
+	There are two copies: one in memory and one in disk.
+	If the one in memory is not modified, the one on disk is still valid.
+	If the one in memory is modified, it must replace the one on the disk.
+
+	Kicking out dirty pages thus takes slower.
+	Thus we should write dirty pages to disk in the background so that we can have only clean pages to kick out.

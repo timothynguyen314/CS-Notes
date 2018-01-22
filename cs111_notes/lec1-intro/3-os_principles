@@ -1,0 +1,13 @@
+OS Principles
+
+Software is much more complex than thirty years ago. Adding evena small thing takes a lot of work because there are so many interacting parts.
+
+A hierarchical structure divides the OS into understandable parts.
+
+Modularity/function encapsulation divides by purpose, and we can understand a function without knowing the inner workings.
+
+We want a good interface that is a contract, a promise of what will and can be done.
+	Multiple implementations work with an interface.
+	A "federation framework" keeps track of available implementations.
+	
+Mechanism does not dictate policy. Mechanism should be able to change under the same policy.

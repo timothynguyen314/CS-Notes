@@ -1,0 +1,29 @@
+CONCURRENCY
+
+"thread"
+	A multithreaded program has multiple PC's, each with their own instructions.
+	A context switch must happen between threads.
+	Instead of saving state to a process control block, we'd have to save state to one of many thread control blocks.
+	In a thread context switch, the address space/page table stays the same.
+
+	Each thread has its own registers and stack despite sharing address space.
+	Thus stack-allocated variables go to a "thread-local storage".
+
+	parallelism
+		making use of multiple processors to run different things at once.
+
+	multithreading also avoids blocking programs due to slow I/O within a program, while multiprogramming did so for processes across programs.
+	multiprocessing makes more sense for logically separate tasks where no data is shared.
+
+	We don't know what thread is running at any point.
+
+"race condition"
+	The outcome depends on the order of execution, which is indeterminate.
+
+"critical section"
+	A piece of code that is shared by threads, like a global variable.
+
+"mutual exclusion"
+	We must ensure critical sections are accessed by one thread at most at a time.
+
+	We can do it by performing a set of instructions "atomically" - all at once or none at all.

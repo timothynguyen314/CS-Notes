@@ -1,0 +1,28 @@
+MECHANISMS
+
+We've been assuming address spaces fit into memory. In reality, they're much bigger.
+We store it in a place w more capacity but slower than memory - a hard disk drive.
+
+We want an illusion of a large address space so you don't have to worry about running out of space.
+Before, there were memory overlays where users would have to manage memory themselves.
+
+"swap space"
+	Space reserved on disk for moving pages in and out, needed especially when switching processes
+	The size of swap spaces determines how many processes you can run at once
+	A process might have some of its pages in memory and the rest on the swap space
+	Processes entirely on the disk are not running
+
+PTE's now need a "present bit" that says whether or not the page in physical memory or if it's on the disk somewhere.
+Accessing a page not in memory is a "page fault".
+
+"page fault handler"
+	OS code that switches a page into memory, updates its physical address, retries w a TLB miss, then again w a TLB hit
+	Moving the page into memory is I/O. During I/O the process is blocked and other processes run.
+
+Three types of TLB misses
+	page present and valid (grab from PTE and retry)
+	page valid but not present (page fault handler)
+	page invalid (trap handler)
+
+OS's have a high and low watermark to determine when to evict pages from memory.
+A thread called a page daemon will evict stuff.

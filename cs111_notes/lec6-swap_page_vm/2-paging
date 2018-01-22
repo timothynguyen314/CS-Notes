@@ -1,0 +1,26 @@
+PAGING
+
+Instead of cutting into variable sized pieces (segmentation), let's do fixed size pieces (paging).
+Memory is an array of page frames.
+Flexible, regardless of how process uses the address space. Simple to understand.
+
+A page table stores address translations, so we know where pages are in physical memory.
+Every process has its own page table.
+
+Everything in the process gets a virtual address consisting of a virtual page # and an offset.
+If the virtual address space is 2^6 = 64 bytes, we need 6 bits for address.
+Say there are 4 pages in the virtual address space. Thus the first 2 bits represent which page we're at, and the remaining 4 bits represent the offset.
+
+A physical frame # / physical page # is associated with each virtual address in the page table. We replace VPN w PPN. Offset stays the same.
+
+Page tables are huge, and thus not stored within the virtual address space. They are in memory elsewhere.
+
+What does a page table entry (PTE) hold?
+	valid bit - if space is unused, ie between data and stack, simply mark it invalid and avoid wasting physical space
+	protection bits - read, write, execute
+	dirty bit - has it been modified since entered into memory?
+	reference bit/accessed bit - has it been accessed?
+
+Paging can be slow. Translating from virtual to physical through page table, fetch from physical. It's slow and big.
+
+A page table base register holds location of the page table.
