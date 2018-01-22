@@ -1,0 +1,10 @@
+DYNAMIC PROGRAMMING
+
+Sometimes a greedy algorithm doesn't exist for a problem. Sometimes divide and conquer might not be enough to reduce exponential runtimes. Dynamic programming breaks up the entire space of solutions into subproblems without exactly being a brute-force algorithm.
+
+GENERAL TECHNIQUE:
+	Maintain an array that contains the OPT(j) for each subproblem 1...n.
+
+	OPT(j) = max(j + OPT(p(j)), OPT(j-1))
+
+	Basically, there's a polynomial number of subproblems, a problem can easily be computed from subproblems, and there's a natural ordering from small to big for subproblems.

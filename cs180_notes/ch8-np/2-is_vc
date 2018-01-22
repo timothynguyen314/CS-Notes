@@ -1,0 +1,25 @@
+INDEPENDENT SET/VERTEX COVER
+
+PROBLEM:
+	We have a graph with n nodes and m edges.
+
+GOAL:
+	Largest independent set S is a set of nodes such that no nodes share ane edge with each other.
+	Smallest vertex cover S is a set of vertices such that every edge has at least one edge covered by S..
+
+	We will show that they are polynomial time reducible to each other, and thus show that they are equivalently hard.
+
+PROOF:
+	If V is the set of nodes.
+	S is an independent set if and only if V-S is a vertex cover.
+
+	For every edge (u,v), u and v can't both be in S. And so every edge is covered by S and V-S.
+
+	Thus if we can solve one to be of size k, we can get the other by n-k.
+
+2nd GOAL:
+	A set cover S is a set of subsets. We want the minimum number of subsets of edges whose union equals all edges.
+	Prove a vertex cover is polynomial time reducible to a set cover.
+
+PROOF:
+	If we have a set cover for edges, each vertex in the subset makes a vertex cover.

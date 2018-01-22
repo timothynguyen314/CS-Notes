@@ -1,0 +1,45 @@
+DIVIDE AND CONQUER
+
+A divide-and-conquer algorithm breaks input into several parts and solves them recursively. It greatly reduces complexity as opposed to brute-force methods. It often works by dividing a problem into two, and then those into two again, and so on... Once you solve individual problems, combine them back together recursively.
+
+A "recurrence relation"
+	Suppose it takes T(n) to solve a problem of size n.
+	We split it up into 2 pieces that take T(n/2) time to do each, and it takes O(n) time to do the splitting and eventual combining - cn.
+		T(n) <= 2 T(n/2) + cn
+	The base case is when n = 2
+		T(2) <= c
+
+	If n is not even, it is more precise to say
+		T(n) <= UpperBound T(n/2) + LowerBound T(n/2) + cn
+
+	We notice that each time the problem is halved, the sum of the constants is always cn (cn/2 + cn/2, cn/4 + cn/4 + cn/4 + cn/4, etc.) And it is done log2n times. Thus this recurrence relation is
+		T(n) <= O(nlogn).
+
+	Ex: Merge-Sort
+
+More "recurrence relations"
+	Suppose in the above relation, we write for q > 2
+		T(n) <= q T(n/2) + cn
+	This leads to
+		T(n) <= (sum from j=1 to j=log2n) ((q/2)^(j-1) * cn)
+		T(n) <= cn((q/2)^(log2n-1) - 1)/(q/2 - 1)
+	Removing constants
+		T(n) <= cn * (q/2)^(log2n)
+		T(n) <= cn * n^(log2q/2)
+		T(n) <= cn * n^(log2q - 1)
+		T(n) <= cn^(log2q)
+		T(n) <= O(n^logq)
+
+	What about q=1?
+		T(n) <= cn + cn/2 + cn/4...
+		T(n) <= 2cn
+		T(n) <= O(n)
+
+Another "recurrence relation"
+	Suppose we have
+		T(n) <= 2 T(n/2) + cn^2
+	We would initially guess O(n^2 logn), but this is incorrect
+		T(n) <= cn^2 + 2cn^2/4 + 4cn^2/16...
+		T(n) <= (1 + 1/2 + 1/4 + 1/8 + ...) cn^2
+		T(n) <= O(n^2)
+

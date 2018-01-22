@@ -1,0 +1,11 @@
+CLUSTERING
+
+PROBLEM:
+	We have a graph with n vertices and m weighted edges.
+
+GOAL:
+	We want to make a k-clustering of maximum spacing: divide the points into k different clusters, but we also want the sum of the minimum distance between any points in a cluster, the spacing, to be minimized.
+
+ALGORITHM:
+	Apply Kruskal's but stop when you have k components--basically stop before adding the last k-1 most expensive edges.
+	Or we get it by subtracting the k-1 most expensive edges from a MST.

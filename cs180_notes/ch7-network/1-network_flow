@@ -1,0 +1,19 @@
+NETWORKS
+
+	Networks have a SOURCE node that generate flow, edges with CAPACITIES that flow moves along, and SINK nodes where the flow must end up at.
+
+	The sum of all the flow entering a node, should equal the sum of all the flow exiting the node.
+	The amount of flow in the network is the sum of edges out of the source node.
+
+	Residual Graphs + Augmented Paths
+
+		A residual graph would have edges for the flows along the graph, and subtract flow from the capacities to show the remaining capacities. And there would be edges representing the flows. Has at most 2m edges.
+
+		If we have a flow, we look at the path the flow moves along. We look at the smallest residual capacity in the path: the bottleneck, and subtract that capacity from all other paths to create an augmented path.
+
+	Network Fun Facts
+		If we take a A-B cut, where s is in A and t is in B, total flow = flow out A - flow going back into A
+
+		If we take a A-B cut, total flow <= c(A,B) the sum of capacities from A to B
+
+		If we have a max flow f, f = c(A,B) for some A-B cut. This is the minimum cut.

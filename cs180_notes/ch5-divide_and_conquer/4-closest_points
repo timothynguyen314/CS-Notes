@@ -1,0 +1,37 @@
+PROBLEM
+	We have n points in the xy plane.
+	We have points p1, p2, ... pn
+	p1 = (x1, y1)
+	pi = (x2, y2)
+	d(pi, pj) is the distance between pi and pj
+
+GOAL
+	We want the pair of points with the shortest distance.
+
+ALGORITHM
+	-First sort points by their x coordinate O(nlogn)
+	-Divide Lx into two halves: Mx and Nx
+	-Recursively find the shortest distance between points in Mx and Nx O(nlogn)
+	-One of these distances can be the shortest distances.
+
+	-The only other possible shortest distance would have one point in Mx and another in Nx.
+	-Take the minimum distance d from the above, and look at all points a horizontal distance d from the middle of Lx, in a new set called Ox
+	-Sort these points by their y coordinate O(nlogn)
+	-Next, find the smallest distance, which might appear to be O(n^2), but...
+
+			   |
+		d/2	d/2|d/2	d/2
+	d/2	___|___|___|___
+	d/2	___|___|___|___
+	d/2	___|___|___|___
+	d/2    |   |   |
+
+		___d___|___d___
+
+	-It is impossible for there to be two points in the same d/2 x d/2 box or this contradicts d being the shortest distance on one side
+	-So if a point is in a d/2 x d/2 box on one side... How many vertices within d/2 x d/2 boxes on the other side are candidates to be shorter than d?
+	-Looking at a point pj, we imagine 2 d x d boxes stemming from it. There are 8 d/2 x d/2 boxes within these 2 boxes, and pj is at the very bottom corner of one of them. There are only 7 other candidates that can be shorter than d.
+	-We check only up to 7 other points for every pj, and so O(n) to find the shortest distance in Ox
+
+	-The shortest distance is the shortest of Mx, Nx, and Ox
+	-O(nlogn) + 2O(nlogn) + O(nlogn) + O(n) = O(nlogn)

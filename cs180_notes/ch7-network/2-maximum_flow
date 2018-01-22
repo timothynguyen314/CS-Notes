@@ -1,0 +1,19 @@
+MAXIMUM FLOW (aka FORD-FULKERSON)
+
+PROBLEM:
+	We have a flow network, with source s and sink t.
+
+GOAL:
+	We want to calculate the maximum flow from s to t.
+
+ALGORITHM:
+	The maximum flow is the minimum cut.
+
+	While there is still a path from s to t (capacities aren't 0)
+		-Run a flow along the path, augmenting it to maximize flow.
+		-Update graph.
+
+COMPLEXITY:
+	If C is the maximum flow out of s, because the FF algorithm can increase a minimum of 1 each turn, it can iterate at most C times.
+	And each turn of the FF algorithm visits at most 2m edges in the residual graph.
+	O(Cm)

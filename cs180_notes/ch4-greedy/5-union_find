@@ -1,0 +1,11 @@
+UNION FIND
+
+The union-find data structure can be used to determine if two points u and v are in the same component.
+	Find(u) returns the component u is in.
+	Find(u) and Find(v) determines if they are in the same component.
+	Union(Find(u), Find(v)) will join the components into one.
+
+IMPLEMENTATION:
+	We could make an array where each member is the name of a component. Find is O(1), but Union will take O(n) as we'd have to update up to n vertices their new component.
+
+	Or we could make a component list with one pointer to the list. Union is O(1), only updating one pointer, and the union takes the name of the larger component. Find is O(log n): we must go through all the old names of a node until we find the newest name; because of the convention that the node takes the name of the larger set in a Union, the name only changes if the set at least doubles in size, which can happen log2n times, and thus Find is O(log n).

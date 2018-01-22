@@ -1,0 +1,21 @@
+TOPOLOGICAL ORDERING
+
+PROBLEM:
+	We have a directed, acylic graph (DAG) with n vertices and m edges.
+
+GOAL:
+	We want a topological ordering, where we can arrange vertices from left to right from v1 to vn, such that vi can reach all the vertices after it, and none of the vertices before it.
+
+ALGORITHM:
+	-In every DAG, there is a vertex v with no incoming edges.
+
+	-Add it to the beginning of the list.
+	-Delete it and its edges from the graph.
+	-Repeat by finding the next vertex with no incoming edges.
+
+COMPLEXITY:
+	At first it seems to be O(n^2), by having to search for a vertex with no incoming edges n times.
+
+	O(m+n)
+		When we delete a vertex, we only look at the vertices connected to it, looking at each of its edges.
+		We look at all vertices and the sum of their degrees, which is the number of edges.

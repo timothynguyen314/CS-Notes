@@ -1,0 +1,15 @@
+PROBLEM:
+	We have two lists L1 and L2.
+	L1 goes 1, 2, 3...n.
+	L2 contains 1 through n, but in a different order.
+
+GOAL:
+	We want to count the number of "inversions", or every instance in L2 where j comes before i when i<j.
+
+ALGORITHM:
+	A brute-force method looks at every pair for O(n^2) time.
+	A faster method would not have to look at every pair.
+
+	-Maintain a count variable initialized at 0.
+	-Do Merge-Sort, O(nlogn)
+	-Whenever you merge, when comparing the left and right subsets, if the head of the right subset is ever smaller, increment count by the size of the left subset.

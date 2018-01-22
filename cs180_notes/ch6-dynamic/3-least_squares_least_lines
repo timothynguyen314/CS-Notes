@@ -1,0 +1,21 @@
+LEAST SQUARES LEAST LINES
+
+PROBLEM:
+	We have n points in a plane.
+
+GOAL:
+	We want to run lines through the plane such that
+		-We minimize the error (difference in y values squared) between points and line
+		-We minimize the error from the number of lines used: a fixed, given error C
+
+ALGORITHM:
+	OPT(j) is the optimum solution for the first j points.
+	e(ij) is the error for the line from points i to j.
+
+	OPT(j) = min(e(ij) + C + OPT(i-1))
+	And we test for all i points from 1 to j-1.
+
+COMPLEXITY:
+	There are n^2 pairs for every possible e(ij). Each e(ij) does n computations. Thus it takes O(n^3) to compute every e(ij).
+
+	Then for every OPT(j) from 1 to n, we have to do O(n) tests for each i. And thus this part is O(n^2).

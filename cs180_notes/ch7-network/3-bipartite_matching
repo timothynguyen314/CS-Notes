@@ -1,0 +1,15 @@
+BIPARTITE MATCHING
+
+PROBLEM:
+	We have a bipartite graph between partitions X and Y.
+
+GOAL:
+	We want to find a matching (each node appears in one edge) such that we have the most edges.
+
+ALGORITHM:
+	Make all edges directed from X to Y.
+	Make an s go to X.
+	Make all Y go to a t.
+	Give all edges a capacity of 1.
+
+	Apply Ford-Fulkerson.

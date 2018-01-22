@@ -1,0 +1,24 @@
+PROJECT SELECTION
+
+PROBLEM:
+	We have n projects.
+	Each project has a revenue, positive or negative.
+	Some projects are prerequisities for other projects.
+	A project be a prerequisite for many others.
+	A project can have many prerequisities.
+
+GOAL:
+	We want to maximize profit.
+
+ALGORITHM:
+	We want to construct a graph such that the minimum cut shows which projects should be included to maximize profit.
+
+	We add a source s that goes to all the projects with positive revenue, with capacity=revenue.
+	We add a sink t that goes from all the projects with negative revenue, with capacity=revenue.
+	All other edges have capacity infinity (thus any cut we do won't include edges of infinity).
+
+	The edges in the minimum cut are the profitable projects we didn't choose, and the costly projects we did choose. We want to minimize this.
+
+COMPLEXITY:
+	Apply Ford-Fulkerson to get max flow.
+	Once we know the max flow, we can compute the minimum cut in O(m) time, by performing a BFS from s on the residual graph. The points in the BFS tree represent one side of the cut.

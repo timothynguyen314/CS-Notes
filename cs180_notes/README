@@ -1,0 +1,62 @@
+CS 180 - Algorithms and Complexity
+
+These are the notes of Tim Nguyen for CS 180: Algorithms and Complexity, taught by Majid Sarrafzadeh at UCLA in Fall 2017.
+
+TABLE OF CONTENTS
+	ch1-intro
+	\
+		1-stable_marriage
+		2-scheduling_problem
+		3-egg_building
+		
+	ch2-complexity
+	\
+		1-complexity
+
+	ch3-graphs
+	\
+		1-graphs
+		2-breadth_first_search
+		3-depth_first_search
+		4-topological_ordering
+
+	ch4-greedy
+	\
+		1-greedy_algorithms
+		2-dijkstra
+		3-prim
+		4-kruskal
+		5-union_find
+		6-clustering
+
+	ch5-divide_and_conquer
+	\
+		1-divide_and_conquer
+		2-merge_sort
+		3-counting_inversions
+		4-closest_points
+
+	ch6-dynamic
+	\
+		1-dynamic_programming
+		2-weighted_scheduling
+		3-least_squares_least_lines
+		4-knapsack
+		5-sequence_alignment
+		6-shortest_path
+
+	ch7-network
+	\
+		1-network_flow
+		2-maximum_flow
+		3-bipartite_matching
+		4-disjoint_paths
+		5-survey_design
+		6-airline_scheduling
+		7-project_selection
+
+	ch8-np
+	\
+		1-polynomial_time_reduction
+		2-is_vc
+		

@@ -1,0 +1,16 @@
+PRIM
+
+PROBLEM:
+	We have a graph with n vertices and m weighted edges.
+
+GOAL:
+	We want to find a minimum spanning tree (MST): a tree containing all vertices such that the sum of the edge weights is minimized.
+
+ALGORITHM:
+	-Divide the graph into two partitions S and T, where T initially has all the vertices.
+	-Add a random vertex from T to S.
+
+	-Successively add the vertex from T to S with the minimum edge between S and T
+
+COMPLEXITY:
+	O(mlogn) due to similar implementation as Dijkstra's algorithm. We have to use and update a heap to search for the minimum edges connected to T.

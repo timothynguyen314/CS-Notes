@@ -1,0 +1,25 @@
+SHORTEST PATH
+
+PROBLEM:
+	We have a weighted directed graph with n vertices and m edges. Weights can be positive and negative, but we can assume there are no negative cycles.
+
+GOAL:
+	We want to find the shortest path to a vertex t.
+
+ALGORITHM:
+	The path from s to t can be at longest n-1 edges.
+	And so OPT(i,j) means the shortest path from j to t with i edges.
+
+	OPT(i,j) = min(	OPT(i-1,j),				//we can get to t in i-1 edges, not i
+					min(ejk + OPT(i-1,k))	//we can get to t in i edges, and we add the smallest edge from j to k, from all the k in the graph
+
+COMPLEXITY:
+	For every i length path up to n-1: O(n),
+	we compute the shortest path from j to t for every j: O(n),
+	and for each path we look at all other vertices: O(n).
+
+	O(n^3)
+
+	OR min(ejk + OPT(i-1,k): this step we only look at the vertices connected to j, and the sum of degrees of all vertices is m. We do this for each path 1 to n-1, and so O(mn).
+
+	ALSO instead of storing in an n x n array, we only need a size n array, one for each node. And we update them whenever we increase the path length.

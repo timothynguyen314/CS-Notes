@@ -1,0 +1,10 @@
+GREEDY ALGORITHMS
+
+A greedy algorithm makes decisions as it goes. It doesn't look very far ahead or wait to see the entire gamut of the problem before making decisions. It takes in the nearest objects it sees and then makes a decision off that evidence alone.
+
+A greedy algorithm can only exist if the goal allows it to, if the objects it sees have enough information. Otherwise, it will produce errors. The main benefit to a greedy algorithm is that it's the fastest and simplest solution.
+
+	-A greedy algorithm produces the optimum solution at EVERY step/decision. It is always ahead of any other solution. And can never be incorrect at any point.
+	-A greedy algorithm should produce the same answer as any other correct algorithm, but just do it faster.
+
+Examples: the scheduling problem, Dijkstra, Prim, and Kruskal are all greedy algorithms.

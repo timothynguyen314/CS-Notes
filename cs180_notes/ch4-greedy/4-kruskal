@@ -1,0 +1,20 @@
+KRUSKAL
+
+PROBLEM:
+	We have a graph with n vertices and m weighted edges.
+
+GOAL:
+	We want to find a minimum spanning tree (MST): a tree containing all vertices such that the sum of the edge weights is minimized.
+
+ALGORITHM:
+	-Start with an empty tree T
+	-Add the two vertices with the minimum edge.
+
+	-Successively add the next lowest edge as long as it doesn't create a cycle.
+
+COMPLEXITY:
+	-We first sort m edges by cost, O(mlogm). This is also O(mlogn)
+	-For each edge (v,w) we do Find(v) and Find(w), O(2mlogn) = O(mlogn)
+	-We do O(n-1)=O(n) Unions
+
+	-O(mlogn)

@@ -1,0 +1,17 @@
+COMPLEXITY
+
+T(n) is our time function
+O(n) is an upper bound
+Omega(n) is a lower bound
+Theta(n) is the ideal bound
+
+T(n) = Omega(f(n)) if there exist constants c, n0 such that for all n >= n0, T(n) >= cf(n)
+T(n) = O(f(n)) if there exist constants c, n0 such that for all n >= n0, T(n) <= cf(n)
+
+Examples:
+	O(n) = 10n + 5
+	O(10n + 5) = n
+	O(n^3) = n^2
+	O(n^2) DOES NOT EQUAL n^3
+
+logn -> sqrt(n) -> n -> nlogn -> n^2 -> 2^n -> n!

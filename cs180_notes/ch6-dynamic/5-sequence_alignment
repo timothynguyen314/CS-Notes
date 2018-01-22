@@ -1,0 +1,34 @@
+SEQUENCE ALIGNMENT
+
+PROBLEM:
+	We are given two strings X and Y lengths m and n respectively.
+
+GOAL:
+	We want to line up the strings next to each other such that
+		We minimize gaps - a character in X or Y is not matched
+		We minimize mismatches - characters are matched with a different one
+	We assign costs to gaps and mismatches and seek to minimize this total cost.
+
+ALGORITHM:
+	OPT(i,j) considers the optimal solution when looking at the strings up to xi and yj.
+	There are three cases:
+		xi and yj are matched
+		xi is unmatched
+		yj is unmatched
+	(if xi and yj are matched with another xm<xi and yn<yj, this is impossible.)
+
+	OPT(i,j) = min(	MISMATCH_COST + OPT(i-1,j-1),
+					GAP_COST + OPT(i-1,j),
+					GAP_COST + OPT(i,j-1))
+
+	Start from OPT(0,0) and build your way up to OPT(m,n).
+
+RUNNING TIME:
+	O(mn)
+
+OTHER FORMS OF THIS PROBLEM:
+	You have a m x n grid.
+	You can go right, up, or both.
+	Right and up have a gap cost.
+	Diagonal has a mismatch cost based on the xi and yj.
+	Find the minimum cost path.

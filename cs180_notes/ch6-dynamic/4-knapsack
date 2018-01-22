@@ -1,0 +1,30 @@
+KNAPSACK
+
+PROBLEM:
+	We have n objects with different weights. We have a knapsack of fixed size W.
+
+GOAL:
+	We want to fit in as much weight into the knapsack as possible.
+
+ALGORITHM:
+	OPT(i, w) is the optimal solution for the first i objects that fill up to a weight w.
+	We want OPT(n, W)
+	We test from 1 to n (looking at them in random order), and for each i, from 0 to W
+
+	OPT(i,w)
+	If wi > w, that means it's impossible to include i, and so
+		OPT(i, w) = OPT(i-1, w) if w < wi
+	Otherwise, we consider the cases where it's included and where it's not	
+		OPT(i, w) = max (OPT(i-1, w), wi + opt(i-1, w-wi))
+
+COMPLEXITY:
+	n
+	.
+	.
+	.
+	2
+	1
+	0
+	 0 1 2 . . . W
+	
+	O(nW)

@@ -1,0 +1,23 @@
+PROBLEM:
+	We have two eggs. We have a 100-story building.
+
+GOAL:
+	We want to find the highest floor we can drop the egg from without breaking.
+	We also want to minimize the number of drops needed.
+
+SOLUTION:
+	-Let's say it will take n drops.
+
+	-We drop the first egg at the n floor.
+	-If it breaks, we try from 1 to n-1 with the second egg.
+	
+	-If it doesn't break, because we have n-1 drops left, we drop the first egg from the n+(n-1) floor.
+	-If it breaks, we try from n+1 to n+(n-2) with the second egg
+
+	-If it doesn't break, because we have n-2 drops left, we drop the first egg from the n+(n-1)+(n-2) floor.
+
+	n + (n-1) + (n-2) + ... + 1 = 100
+	(n)(n+1)/2 = 100
+	n = 14
+
+	It will take a minimum of 14 drops to find the highest floor we can drop the egg from.

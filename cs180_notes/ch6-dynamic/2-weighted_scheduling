@@ -1,0 +1,25 @@
+WEIGHTED SCHEDULING PROBLEM
+
+PROBLEM:
+	We have n tasks with different beginning and end times, and with weights.
+
+GOAL:
+	We want to find a subset of non-overlapping tasks, such that we maximize the weight of tasks.
+
+ALGORITHM:
+	-Assume intervals are sorted in order of finishing time and look at intervals in this order.
+	-For every interval j, we p(j) as the last interval to end before and not overlap with j
+	-We calculate the optimal solution OPT(j), meaning the solution when you only consider the first j intervals, with OPT(n) being our answer.
+
+	-Before considering j, we will have found a OPT(i) for all the intervals before j.
+	-For every interval j, we consider the case when we include and when we don't.
+		-Including j means excluding all members between p(j) and j, and so OPT(j) = OPT(p(j)) + j
+		-Excluding j means OPT(j) = OPT(j-1)
+	-OPT(j) = max (OPT(p(j)) + j, OPT(j-1))
+
+	-If we're keeping track of the actual intervals that form OPT(j),
+
+COMPLEXITY:
+	At first, it seems exponential: OPT(n) would mean calling OPT(p(j)) and OPT(j-1), who each would make another two calls. But then we realize starting from OPT(n) like this would mean pointlessly repeating calls.
+	
+	O(n), because each OPT(j) takes 1 step, and we do OPT(1), OPT(2), ... OPT(n).

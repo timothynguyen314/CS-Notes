@@ -1,0 +1,14 @@
+DISJOINT PATHS
+
+PROBLEM:
+	We have a directed graph with m edges and n vertices.
+
+GOAL:
+	Two paths are disjoint if they don't share an edge.
+	We want to find the maximum number of disjoint paths from s to t.
+
+ALGORITHM:
+	Give edges capacity of 1.
+	If the max flow from s to t is k, there are k disjoint paths.
+
+	The minimum number of edges to remove such that there is no path from s to t, is the number of k disjoint paths, because max flow = min cut.

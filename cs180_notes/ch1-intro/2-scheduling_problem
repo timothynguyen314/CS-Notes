@@ -1,0 +1,19 @@
+SCHEDULING PROBLEM
+
+PROBLEM:
+	We have n tasks with different beginning and end times.
+	
+GOAL:
+	We want to find a subset of non-overlapping tasks, such that we maximize the number of tasks.
+
+ALGORITHM:
+	-Find the task that ends first.
+	-Then find the next non-overlapping task that ends first after it.
+	-And so on.
+
+PROOF BY INDUCTION:
+	-This algorithm has the shortest amount of time for task=1
+	-Assuming the algorithm minimizes the amount of time for tasks=j...
+	-The j+1th task adds least amount of time, and thus algorithm minimizes amount of time for tasks=j+1
+
+COMPLEXITY: O(n) because it looks at most n tasks.

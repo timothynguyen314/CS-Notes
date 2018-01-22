@@ -1,0 +1,22 @@
+DEPTH FIRST SEARCH
+
+PROBLEM:
+	We have a graph with n vertices and m edges.
+
+GOAL:
+	We want to determine a connected component of the graph.
+
+ALGORITHM:
+	-Pick a vertex v.
+
+	-Look at an unvisited neighbor x and mark it as visited.
+	-If x has neighbors, repeat with x.
+	-If x has no neighors, look at the next neighbor of v.
+
+COMPLEXITY:
+	O(m+n) because we look at n vertices and m edges.
+
+PROPERTIES:
+	If an edge (x,y) exists in G that doesn't in the DFS tree, then either x or y is an ancestor of the other in the DFS tree.
+	The DFS tree represents a connected component.
+	Implemented with a stack.

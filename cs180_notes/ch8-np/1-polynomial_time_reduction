@@ -1,0 +1,9 @@
+POLYNOMIAL TIME REDUCTION
+
+There are some problems that we do not know any polynomial time algorithms for, and we can't prove such algorithms don't exist. If we do manage to prove such an algorithm exist, we will have proved an algorithm for all such problems. These are NP-complete problems.
+
+We'd say that for a problem X, if we could put it as a black box, we can solve it in a single step as a black box and then use it to solve Y.
+And then we say Y is polynomial time reducible to X, Y <= P X
+
+If X is solved in polynomial time, so is Y.
+If Y is unsolvable in polynomial time, so is X.

@@ -1,0 +1,21 @@
+BREAD FIRST SEARCH
+
+PROBLEM:
+	We have a graph with n vertices and m edges.
+
+GOAL:
+	We want to determine a connected component of the graph.
+
+ALGORITHM:
+	-Pick a vertex v.
+
+	-Mark all unvisited neighbors of this vertex as visited by looking at each edge.
+	-Repeat for each neighbor
+
+COMPLEXITY:
+	O(m+n) because we look at n vertices and m edges.
+
+PROPERTIES:
+	Each Level Ln below the vertex v represents the shortest distance of n from v to the vertices in Ln.
+	The BFS tree represents a connected component.
+	Implemented with a queue.

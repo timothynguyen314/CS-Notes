@@ -1,0 +1,25 @@
+DIJKSTRA
+
+PROBLEM:
+	We have a graph with n vertices and m weighted edges.
+
+GOAL:
+	We want to find the path from v to any other vertex of least weight.
+
+ALGORITHM:
+	-Maintain a list L that contains all visited nodes and lengths of paths from v to them.
+	-Add (v, 0) to the list.
+	
+	-For all nodes ni not in L, but connected to a (nj, dj) in L with a weighted edge di, add (ni, di+dj) such that di+dj is minimized.
+
+COMPLEXITY:
+	-To implement the algorithm, we use a heap that contains all the nodes and their respective known shortest paths to v, all paths initialized to infinity.
+
+	-Every time we add a node ni to L, we look at all the nodes connected to ni.
+		-For each edge, we update our heap with a new shortest path
+		-And then to add the next node, we search the heap for the newest minimum shortest path
+
+	Updating the tree is O(log(n)). We do this n times.
+	Searching the tree is O(log(n)). We do this m times.
+
+	O(nlog(n) + mlog(n)) = O(mlog(n))

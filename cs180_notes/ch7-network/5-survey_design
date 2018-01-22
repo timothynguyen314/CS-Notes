@@ -1,0 +1,16 @@
+SURVEY DESIGN
+
+PROBLEM:
+	There are n customers and m products.
+
+GOAL:
+	We want to ask a customer i about a subset of the products they bought, between size ci and ci'.
+	Each product j must have between pj and pj' customers asked about it.
+
+ALGORITHM:
+	A source s goes to each customer, with capacity ci', and lower bound ci.
+	An edge exists from a customer to a product if they bought the product, of capacity 1.
+	A sink t goes from each product, with capacity pj', and lower bound pj.
+
+	Apply Ford-Fulkerson.
+	If a flow exists that fulfills all the lower bounds, then we have our survey design.

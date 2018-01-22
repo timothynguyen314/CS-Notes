@@ -1,0 +1,13 @@
+GRAPHS
+
+A graph consists of vertices and edges.
+
+A graph can have directed or undirected edges.
+A graph can have weighted or unweighted edges.
+
+A graph can be connected or unconnected.
+A directed graph can be strongly connected if every vertex is reachable from others.
+
+A tree is a connected, acyclic graph. If it has n vertices, it has n-1 edges.
+
+A graph can be bipartite, meaning it has no odd cycles, and there are two groups of vertices that are only connected to each other and not within each other.

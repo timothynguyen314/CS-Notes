@@ -1,0 +1,21 @@
+MERGE SORT
+
+PROBLEM:
+	We have a set of n numbers.
+
+GOAL:
+	We want to sort them in increasing order.
+
+ALGORITHM:
+	-Split the set into two.
+	-Split the subsets into two.
+
+	-Continue until subsets consist of two numbers.
+	-Sort two numbers by simple comparison.
+
+	-Merge subsets together, by only looking at heads of subsets and adding the smaller until both subsets are empty.
+
+COMPLEXITY:
+	-Dividing n numbers into two groups takes O(n) time since we must determine a subset for each of the n numbers. Combining them takes O(n) time since we make n comparisons at each level.
+	-We divide and combine log2n times.
+	O(nlogn)

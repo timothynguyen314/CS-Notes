@@ -1,0 +1,38 @@
+STABLE MARRIAGE
+
+PROBLEM:
+	There are n men and women. Each man has a preference list containing all the n other women. Each woman has a preference list containing all the n other men.
+
+GOAL:
+	Match every man with a woman, and vice versa, such that there is no instability. An instability is defined as:
+
+		Man u prefers Woman v over Woman v'.
+		Woman v prefers Man u over Man u'.
+
+		Man u is matched with Woman v'.
+		Man u' is matched with Woman v.
+
+ALGORITHM:
+	-Find an available man
+	-Look at the woman highest on his priority list that he hasn't asked yet, and ask her
+		-if woman is available, match them
+		-if woman is taken, compare the man asking with the man she is currently with on her priority list, and take the one higher
+	-Repeat above steps until all men are unavailable
+
+PROOF BY CONTRADICTION:
+	-Suppose an instability exists
+		-u would have asked v before v'
+			-if u asked before u'
+				-if u was rejected, u' would have been rejected too
+				-if u was not rejected, u' could not have replaced him
+			-if u asked after u'
+				-impossible since it should have replaced u'
+		-thus it is impossible for an instability to exist
+
+	-Suppose a man and woman are unmatched
+		-the man must have asked the woman at some point since he must go through his entire list
+		-the woman can only reject the man if she is already taken, but we're saying she's free, meaning nobody else has asked her
+		-thus it is impossible for there to be an unmatched pair
+
+COMPLEXITY:
+	O(n^2) because n men can potentially ask n women

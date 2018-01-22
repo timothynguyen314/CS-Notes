@@ -1,0 +1,18 @@
+AIRLINE SCHEDULING
+
+PROBLEM:
+	A flight path consists of an origin and destination, and an arrival and destination time.
+	We have m such paths.
+	We have k planes.
+
+GOAL:
+	Is it possible to fulfill all m paths?
+
+ALGORITHM:
+	Flights are directed edges of capacity 1, with beginnings ui and ends vi. These have a lower bound of 1 (they must be filled).
+	If a flight i can reach a flight j (the arrival time of i is before the departure time of j), there will be a directed edge from vi to uj.
+	A source s goes to a beginning node with capacity k.
+	The beginning node goes to each ui with capacity of 1.
+	A sink t goes from each vj with capacity of 1.
+
+	Apply Ford-Fulkerson's Algorithm and see if we can satisfy all the lower bounds.
