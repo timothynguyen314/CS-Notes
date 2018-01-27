@@ -13,3 +13,70 @@ Semaphores
 	sem_post() increments a semaphore and, if a thread is waiting to be woken up, does so
 
 Binary semaphore
+	Imagine there are two threads. The first thread calls sem_wait, decrementing semaphore from 1 to 0. Because semaphore is >= 0, the first thread does not need to wait, and can enter the critical section. When Thread 2 calls sem_wait, the semaphore goes to -1, and Thread 2 must wait until Thread 1 calls sem_post to raise the semaphore back to 0.
+
+	The scheduler state of a thread is Running, Ready, and Sleeping.
+	A semaphore used as a lock (held, or not held) is called a binary semaphore.
+
+Semaphores for Ordering
+	We want to use semaphores to order events in a concurrent program.
+
+	A thread creates another thread and wants to wait for its child to finish execution.
+	The semaphore should be initialized to 0, and the parent should call sem_wait right after making the child, and the child should call sem_post when it finishes.
+	But what if the child finishes before the parent gets to call sem_wait? The child will call sem_post, and then the parent will call sem_wait and realize it doesn't have to wait, the desired effect.
+
+Producer/Consumer problem (aka Bounded Buffer problem)
+	Producer puts stuff in a buffer. If the buffer is empty, the consumer should wait. If the buffer is full, the producer should wait.
+
+	First Attempt
+		Let's say there is one producer, one consumer, and the buffer is size one.
+		The producer waits for buffer to become empty before putting stuff in.
+		The consumer waits for buffer to become full before taking stuff out.
+
+		full and empty should be initialized to 0 and 1 respectively.
+		consumer calls sem_wait(&full)
+		producer calls sem_wait(&empty), then sem_post(&full)
+		producer might call sem_wait(&empty) again, and will wait until consumer calls sem_post(&empty).
+
+		But we have a race condition if we have bigger buffers, multiple producers, or multiple consumers.
+		E.g. a producer starts to fill the ith buffer, but is interrupted before it can finish, and another producer can overwrite the data.
+
+	Solution
+		We need to add mutual exclusion.
+		Filling a buffer and incrementing the index into the buffer is a critical section. Thus we add binary semaphores.
+		Deadlock: consumer gets lock then goes into sleep, producer goes into critical section but doesn't have the lock.
+		The mutex hold/release must be next to the critical section, and the wait/post must be outside.
+
+Reader/Writer Locks
+	We might want different locks for different operations. Different locks for inserting into a list and for simply looking up something in the list. Thus we have reader/writer locks.
+
+	If a thread wants update a data-structure, it calls rwlock_acquire_writelock(), and then eventually rwlock_release_writelock(). There can only be one writer at a time.
+
+	If a thread wants to read, it calls the rwlock_acquire_readlock() and updates a readers variable so we can keep track of how many readers there are, and eventually calls rwlock_release_readlock(). There can be as many readers as you want at once.
+	However, the first thread that reads also gets the write lock, and the write lock is not released until all readers are done.
+
+	Not really fair to writers.
+
+The Dining Philosophers
+	Assume there are five philosophers at a table. There is a fork between each pair of philosophers, for five total forks.
+	A philosopher doesn't need a fork if he's thinking. He needs two forks when he's eating.
+
+	while(1){
+		think();
+		getforks();
+		eat();
+		putforks();
+	}
+
+	void getforks(){
+		sem_wait(forks[left(p)]);
+		sem_wait(forks[right(p)]);
+	}
+
+	void putforks(){
+		sem_post(forks[left(p)]);
+		sem_post(forks[right(p)]);
+	}
+
+	Deadlock arises if each philosopher grabs left first, and then they're all waiting for right.
+	Solution is at least one philosopher goes right first.
