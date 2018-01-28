@@ -1,0 +1,23 @@
+DEADLOCK AVOIDANCE
+
+When the four conditions for deadlock are necessary, avoidance is the solution.
+
+Analogy:
+	Main memory is exhausted. We need to swap processes out of secondary storage to free up memory. This requires creating new I/O requests descriptors, which must be allocated from main memory.
+
+	Strategies to avoid this situation is akin to deadlock avoidance.
+
+Reservation
+	We decline to grant requests that would lead to main memory getting exhausted.
+	But declining such a request mid-operation can be messy...instead processes should already reserve certain amounts of memory before actually using it.
+
+	sbrk() doesn't actually grant more memory to a process. It reserves space for the process, but no assignment happens until referencing. We should make a decision at reservation, not at assignment.
+
+Over-Booking
+	It is usually unlikely that clients will use the entirety of their reservation. United Airlines does it.
+	But OS usually underbooks, because it is cautious.
+
+Dealing with Rejection
+	What do we do when reservation is denied?
+	Log an error message and quit? Continually retry? Try other things in the meantime?
+	Many things, but the key thing is that deadlock was avoided.

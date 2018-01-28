@@ -1,0 +1,11 @@
+HEALTH MONITORING AND RECOVERY
+
+How to tell a system went into deadlock?
+	Make a dependency graph where you identify all blocked processes and the resources they own/are waiting on.
+	See if there's a loop.
+	But maybe all that information isn't present to us.
+
+Health Monitoring
+	We should have an internal monitoring agent regularly check for failures, or make periodic reports to a central monitoring agent.
+	The software should be designed so that any process can be killed or restarted at anytime.
+	"mark out thresholds" is a tradeoff between waiting too long to detect errors or making false reports.
