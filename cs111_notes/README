@@ -62,3 +62,9 @@ TABLE OF CONTENTS
 		1-mutex_asynchronous-completion
 		2-locks
 		3-condition_variables
+
+	lec9-semaphores
+	\
+		1-semaphores_synchronization
+		2-lock_based_concurrent_data_structures
+		3-semaphores
