@@ -1,0 +1,40 @@
+INFORMED SEARCH
+
+What is Informed Search?
+	Informed Search uses info outside the definition of the problem.
+	"best first search" is where the node chosen for expansion is chosen by an evaluation function, working like uniform cost search.
+	Implementation of f determines the search.
+	f will often have a "heuristic function" h(n), which returns estimated cheapest cost from state at n to goal state.
+
+Greedy Best First Search
+	f(n) = h(n)
+	Expand the node that is closest to the goal based on purely the heuristic function
+	For example, if we're looking for fastest route from A to B with points in between, we can use the straight line distance as a heuristic. You could end up not expanding a single node that isn't on the solution path.
+
+A* Search
+	f(n) = h(n) + g(n) where g is the cost function
+
+	Conditions for Optimality
+		h(n) must be an "admissable" heuristic -> tree_search is optimal
+			It never overestimates the cost to reach the goal. It always underestimates.
+			g(n) is the actual cost, and thus f(n) never overestimates if h(n) never overestimates.
+		h(n) must be "consistent/monotonic" -> graph_search is optimal
+			For every node n and successor n'
+			h(n) <= stepcost from n to n' + h(n')
+
+	If all step costs are finite and b is finite, then we have completeness.
+
+	The cost of a path is always non-decreasing, and we can thus draw contours in the state space.
+	Also, when we reach n, we've found the optimal path to n.
+
+	All f(n) will be lower than the actual cost of the solution path.
+	And thus if we reach a subtree with higher cost, we can "prune" it and ignore it.
+
+	A* is optimally efficient among other algorithms using the same heuristic--any other algorithm might get the optimal solution but would expand more nodes.
+
+	Time complexity depends on the absolute/relative error of the heuristic in comparison to actual cost. It can get really complex, and it becomes impractical to find an optimal solution.
+	Space complexity is the worst problem though, as we must keep track of visited nodes.
+
+	A* Iterative Deepening - Each iteration is the smallest f=(g+h) cost of any node that exceeded the cutoff the previous iteration. Saves space but not really time, like IDS.
+
+

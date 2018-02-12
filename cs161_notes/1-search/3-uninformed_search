@@ -1,0 +1,186 @@
+UNINFORMED SEARCH
+
+BFS
+	Use a FIFO queue to visit nodes
+	The goal test is applied when nodes are generated, not when they are expanded.
+	Finds the shallowest path to any node in the frontier.
+
+	Complete? Yes, it will eventually find the goal state (if branching factor and depth of goal is finite).
+	Time Complexity?
+		If goal is at level d, we have
+		b + b^2 + b^3 + ... + b^d = O(b^d)
+
+		If we applied goal test at expansion and not generation, we'd have O(b^(d+1))
+	Space Complexity?
+		We must store every node in the explored set, such is O(b^(d-1))
+		The frontier is this multiplied by b, so we have O(b^d)
+
+	Can only be used for small problems.
+
+Uniform Cost Search
+	Use a priority queue to visit nodes, where we expand the node of lowest cost.
+	The goal test is applied when nodes are expanded, not when they are generated.
+	It also goes back and tests other paths to nodes in the frontier before making a decision.
+	Finds the least cost path to any node in the frontier.
+
+	Complete? Yes, if all steps are positive.
+	Complexity?
+		Assume C is the cost of the optimal solution.
+		Assume every action costs at least ∈.
+		That means we'll get to C in at least C/∈ steps.
+		O(b^(1 + C/∈)).
+		If all costs are the same, we get O(b^(1+d)), which is like BFS except we check at expansion not generation.
+
+DFS
+	Use a LIFO queue to visit nodes.
+	
+	Not complete if we have infinite depth.
+	Not optimal, as sometimes a goal of shorter path exists besides the one we find.
+
+	Time complexity?
+		O(b^m), much larger than O(b^d)
+	Space complexity?
+		If we keep track of visited nodes (graph search), no difference.
+		If we don't keep track of visited nodes (tree search--chance of getting stuck in a loop), a node could be removed from memory after its children have been explored. A max of m sets of b children leads to O(bm)
+		"backtracking search" furthers this by looking at only one child instead of every child, leading to O(m).
+
+Depth Limited Search
+	Stop looking after a depth l.
+	Incomplete if d > l.
+	Nonoptimal if d < l.
+
+	Time complexity - O(b^l)
+	Space complexity - O(bl)
+
+Iterative Deepening Search
+	Depth 1, 2, 3, ... until finding the goal.
+
+	Complete if branching factor and goal depth are finite, like BFS.
+	Space is O(bd) like DFS.
+	Time is d(b) + (d-1)b^2 + (d-2)b^3 + ... + (1)b^d, which is still O(b^d)
+
+	IDS is the preferred search when we have a large space and the depth is unknown.
+
+Bidirectional Search
+	Start a search from the initial state and the goal simultaneously, and looking for intersections in frontier.
+	Time and Space Complexity is O(b^(d/2)), if we did BFS on both sides.
+	At least one frontier must be kept in memory to do a frontier check, so we can only do IDS one side if we want.
+
+	Only possible if goal state is explicitly defined.
+
+SUMMARY
+Complete?
+	BFS - Yes, if b is finite
+	UCS - Yes, if all steps have positive cost
+	DFS - No
+	DLS - No
+	IDS - Yes, if b is finite
+	BiS - Yes, if b is finite and if both directions use BFS
+
+Time?
+	BFS - O(b^d)
+	UCS - O(b^(1 + C/∈))
+	DFS - O(b^m)
+	DLS - O(b^l)
+	IDS - O(b^d)
+	BiS - O(b^(d/2))
+
+Space?
+	BFS - O(b^d)
+	UCS - O(b^(1 + C/∈))
+	DFS - O(bm)
+	DLS - O(bl)
+	IDS - O(bd)
+	BiS - O(b^(d/2))
+
+Optimal?
+	BFS - Yes, if step costs are identical
+	UCS - Yes
+	DFS - No
+	DLS - No
+	IDS - Yes, if step costs are identical
+	BiS - Yes, if step costs are identical and both directions use BFS
+
+PSEUDOCODE - BFS
+	BFS(problem)
+		node = make_node(problem.initial_state)
+		if(problem.goal_test(node.state))
+			return solution(node)
+		initialize(frontier)		//contains node, FIFO queue
+		initialize(explored_set)
+		while(1)
+			if(empty(frontier))
+				return failure
+			add node.state to explored_set
+			node = pop(frontier)
+
+			foreach action in problem.actions(node.state)
+				child = child_node(problem, node, action)
+				if(!frontier.contains(child) && !explored_set.contains(child))
+					if(problem.goal_test(child.state))
+						return solution(child)
+					add child to frontier
+
+PSEUDOCODE - Uniform Cost Search
+	Uniform Cost Search (problem)
+		node = make_node(problem.initial_state)
+		initialize(frontier)		//contains node, priority queue ordered by path_cost
+		initialize(explored_set)
+		while(1)
+			if(empty(frontier))
+				return failure
+			node = pop(frontier)
+			if(problem.goal_test(node.state))
+				return solution(node)
+			add node.state to explored_set
+
+			foreach action in problems.actions(node.state)
+				child = child_node(problem, node, action)
+				if(!frontier.contains(child) && !explored_set.contains(child))
+					add child to frontier
+				else
+				if(frontier.contains(child) && child.path_cost < frontier_child.path_cost)
+					replace frontier_child w child
+
+PSEUDOCODE - Depth Limited Search
+	Depth Limited Search (problem, limit)
+		return recursive_DLS(make_node(problem.initial_state, problem, limit))
+
+	recursive_DLS(node, problem, limit)
+		if(problem.goal_test(node.state))
+			return solution(node)
+		else
+		if(limit == 0)
+			return cutoff
+		else
+			cutoff_occurred = false;
+			foreach action in problems.actions(node.state)
+				child = child_node(problem, node, action)
+				result = recursive_DLS(child, problem, limit-1)
+				if (result == cutoff)
+					cutoff_occured = true;
+				else
+				if (result != failure)
+					return result
+			if(cutoff_occurred)
+				return cutoff
+			else
+				return failure
+
+PSEUDOCODE - Iterative Deepening Search
+	Iterative Deepening Search (problem)
+		for depth = 0 to infinity
+			result = depth_limited_search(problem, depth)
+			if result != cutoff
+				return result
+
+
+
+
+
+
+
+
+
+
+

@@ -1,3 +1,16 @@
 CS 161 - Artificial Intelligence
 
 These are the notes of Tim Nguyen for CS 161: Artificial Intelligence, taught by Guy Van den Broeck at UCLA in Winter 2018.
+
+TABLE OF CONTENTS
+	1-search
+	\
+		1-the_problem
+		2-example_problems
+		3-uninformed_search
+		4-informed_search
+		5-heuristics
+		6-local_search
+	2-game_playing
+	3-constraint_satisfaction
+	4-propositional_logic

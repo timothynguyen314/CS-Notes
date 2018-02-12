@@ -1,0 +1,101 @@
+SYSTEMATIC SEARCH
+
+Steps to Problem Solving
+	"goal formulation" - where do we want to end up?
+	"problem formulation" - what are the actions and states we can take before reaching the goal?
+
+	Properties of an Environment
+		"observable" - can you know your current state?
+		"discrete" - are there finite actions to choose from?
+		"known" - do we know the states each action leads to?
+		"deterministic" - does each action have only one outcome?
+
+	With these four assumptions, we should be able to reach the goal state in a fixed number of actions, a "solution".
+	The process of finding this sequence is called a "search".
+	Once the solution is found, we can "execute".
+	Thus the process is "formulate, search, execute".
+
+Properties of a Problem
+	"initial state"
+	A list of "actions" that are available to the current state. Such actions are called "applicable" to s.
+	A "transition model" that describes the states returned by each action--such states are called "successors".
+	The initial state, actions, and transition model form the "state space", which is a graph of states.
+	
+	The "goal test" determines whether a given state is the goal state
+	The "path cost" is the cost of getting to each state. There are "step costs" for each individual action.
+	A solution goes from the initial to goal state and has a path cost. The optimal solution has lowest path cost.
+
+Search Tree
+	"Nodes" correspond to states.
+	"Expanding" a state is performing every possible action, "generating" new nodes, going from parent to child nodes.
+	A "leaf node" has no children.
+	The "frontier"/"open list" is the set of available children to expand.
+	An "explored set"/"closed list" is the set of visited nodes, especially to avoid "repeated states" and infinite loops.
+
+	Nodes
+		State - which state does the node belong to?
+		Parent - who generated this Node?
+		Action - what did the Parent do?
+		Path-Cost - cost found by looking to parent
+
+		Node is a data structure. State is a configuration of the world.
+		Nodes are on a path. The same state can be in two nodes if it's on two paths.
+
+	Data Structures
+		A FIFO/LIFO/Priority queue is used for the frontier.
+		A hash table is used for the explored set, so that insertion and lookup should take constant time.
+
+Performance
+	Completeness - Will it find the solution if there is one?
+	Optimality - Does it find the best solution?
+	Time/Space Complexity - How long? How much space?
+
+	Measuring Complexity
+		b - "branching factor" or max # of successors to a node
+		d - "depth" of shallowest goal
+		m - max length of path in tree
+
+	Search cost accounts for complexity, total cost accounts for path cost as well.
+
+PSEUDOCODE - PROBLEM SOLVING AGENT
+	sequence - action sequence, initially empty
+	state - description of world state
+	goal - a goal, initially null
+	problem - a problem formulation
+
+	problem_solving_agent (percept)
+		state = update_state(state, percept)
+		if(empty(sequence))
+			goal = formulate_goal(state)
+			problem = formulate_problem(state, goal)
+			sequence = search(problem)
+			if(sequence == NULL)
+				return NULL
+		action = first(sequence)
+		sequence = rest(sequence)
+		return action
+
+PSEUDOCODE - TREE AND GRAPH SEARCH
+	tree_search (problem)
+		initialize(frontier)
+		while(1)
+			if(empty(frontier))
+				return failure
+			choose leaf from frontier
+			if(node == goal)
+				return solution(node)
+			expand node and add to frontier
+
+	graph_search (problem)
+		initialize(frontier)		//according to initial state
+		initialize(explored_set)	//empty
+		while(1)
+			if(empty(frontier))
+				return failure
+			choose leaf from frontier
+			if(node == goal)
+				return solution(node)
+			add node to explored_set
+			expand node
+			if(!frontier.contains(child) && !explored_set.contains(child))
+				add to frontier
