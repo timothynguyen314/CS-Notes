@@ -12,5 +12,11 @@ TABLE OF CONTENTS
 		5-heuristics
 		6-local_search
 	2-game_playing
+	\
+		1-games
+		2-optimal_decisions
+		3-alpha_beta_pruning
+		4-imperfect_real_time_decisions
+		5-stochastic_games
 	3-constraint_satisfaction
 	4-propositional_logic

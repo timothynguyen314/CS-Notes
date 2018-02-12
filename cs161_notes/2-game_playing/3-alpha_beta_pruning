@@ -1,0 +1,43 @@
+ALPHA BETA PRUNING
+
+minimax is exponential with the depth of the tree. We need to prune parts of the tree that will have no effect on the minimax decision.
+
+Looking at node n: if we have a better choice at a parent node or anywhere further up, n will never be put into play, and so once we've learned enough information about n, we can prune it.
+
+alpha - the best choice we've found so far for Max along our path
+beta - the best choice we've found so far for Min along our path
+
+Thus, we prune anything below alpha or beta as we move along our path.
+Move ordering is important. If we look at the worst state first, then we won't prune anything.
+We could look at history (have we visited this state or a similar one before?) to pick the best state first.
+Often states are transpositions of each other, being identical except for the path taken to them.
+A transposition table will keep track of transpositions so we don't have to repeat pruning calculations.
+
+The theoretical limit of alpha beta pruning is O(b^(m/2))
+
+PSEUDOCODE
+	alpha_beta_search(state)
+		v = max_value(state, -infinity, infinity)
+		return action in actions(state) with v
+
+	max_value(state, alpha, beta)
+		if(terminal_test(state))
+			return utility(state)
+		v = -infinity
+		foreach action in actions(state)
+			v = max(v, min_value(result(state,action),alpha, beta))
+			if v >= beta
+				return v
+			a = max(a, v)
+		return v
+
+	min_value(state, alpha, beta)
+		if(terminal_test(state))
+			return utility(state)
+		v = +infinity
+		foreach action in actions(state)
+			v = min(v, max_value(result(state,action),alpha, beta))
+			if v <= alpha
+				return v
+			b = min(b, v)
+		return v

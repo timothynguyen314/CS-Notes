@@ -1,0 +1,40 @@
+OPTIMAL DECISIONS
+
+An optimal solution leads to a winning terminal state.
+But our strategy is contingent on the other player's action and so we must prepare for each possible action.
+So one "move" really consists of two moves, each called a ply.
+
+The "minimax" value of a node, is a utility value assigned to the node assuming both players optimally from then on.
+One player Max wants a max value (i.e. 1), the other player Min wants a min value (i.e. 0).
+
+minimax(s) =
+	utility(s)									if Terminal_Test(s)
+	max of all minimax(result(state, action))	if Player is Max
+	min of all minimax(result(state, action))	if Player is Min
+
+The minimax algorithm goes to the bottom leaves, then recursively calculates all minimaxes back to the top.
+time complexity: O(b^m)
+space complexity: O(bm) for algorithm that generates all actions at once, O(m) for algorithm that generates one action at a time
+
+What about more than two players?
+If we had n players, the utility function would return a vector of n values, one for each player.
+
+PSEUDOCODE
+	minimax_decision(state)
+		return max of min_value(result(state,action)), for all action
+
+	max_value(state)
+		if(terminal_test(state))
+			return utility(state)
+		v = -infinity
+		foreach a in actions(state)
+			v = max of v and min_value(result(state,action))
+		return v
+
+	min_value(state)
+		if(terminal_test(state))
+			return utility(state)
+		v = +infinity
+		foreach a in actions(state)
+			v = min of v and max_value(result(state,action))
+		return v

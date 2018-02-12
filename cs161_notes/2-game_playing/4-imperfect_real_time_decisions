@@ -1,0 +1,25 @@
+IMPERFECT REAL TIME DECISIONS
+
+It's not practical for alpha beta pruning search to have to go all the way to terminal states, even if it's only a subtree.
+So we should cutoff search early, and apply a heuristic "evaluation function" that turns nonterminal nodes into terminal leaves, by estimating utility.
+
+h_minimax (state, depth)
+	eval(state, depth)										if cut_off_test(state, depth)
+	max of all h_minimax(result(state,action), depth+1)		if player is Max
+	min of all h_minimax(result(state,action), depth+1)		if player is Min
+
+Evaluation Function
+	Strongly dependent on our evaluation function.
+		Our evaluation function should provide a same ordering of non-terminal states as the utility function will, or at least have a strong correlation.
+		The computation should not take too long!
+
+	We'd make our evaluation function based off features of the state, and make categories where all members in the category share certain features, i.e. # of types of chess pieces.
+	We can assign material values/weights to each feature.
+	The evaluation of a category can be a weighted linear function, a sum of weights*features.
+
+	The weights we assign can be from human experience, or machine learning.
+
+Cutoff
+	Instead of calling terminal_test then calling utility, we call cutoff_test(state, depth) then calling heuristic eval(state, depth). Depth can be fixed or we can do IDS until time runs out.
+	We should apply a quiescence search to ensure that no moves that radically effect eval will be made, and that we could safely make a decision off our current eval.
+	The horizon effect is when you delay an inevitable bad event beyond the cutoff depth so that it seems like a good move. This can be fixed with a singular extension, where we remember a move that is clearly better at any point in our search, and if the move can be done at our state, we extend our depth.

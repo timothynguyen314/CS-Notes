@@ -1,0 +1,18 @@
+STOCHASTIC GAMES
+
+Stochastic games involve a random event like throwing dice.
+We must then include chance nodes in addition to min and max.
+Instead of a fixed minimax we have an expected value: the average of the possible values.
+
+We go from max to chance to min to chance...
+
+expectiminimax(state)
+	utility(state)													if terminal_test(state)
+	max of all expectiminimax(result(state,action))					if player is max
+	min of all expectiminimax(result(state,action))					if player is min
+	sum of probability(roll) * expectiminimax(result(state,roll))	if player is chance
+
+O(b^m n^m) where n is the number of distinct rolls
+
+It is possible to alpha beta prune chance rolls, even if chance is supposed to find an average of rolls.
+Place an extreme bound, and use the extreme bound instead of having to calculate a value.
