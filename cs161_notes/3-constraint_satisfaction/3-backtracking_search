@@ -1,0 +1,53 @@
+BACKTRACKING SEARCH
+
+Problems can't be solved by inference alone; we must find a solution.
+Naively, we think that the branching factor of a tree is nd, (n-1)d, (n-2)d, ... , d
+But CSPs are "commutative", meaning that the order of actions has no effect on the outcome.
+And so we only need to look at one node at a time, and so the branching factor is just d.
+
+Backtracking search chooses one variable at a time, then tries all values--if there's inconsistency, it can go to the next value, but if not it goes to the next variable.
+
+PSEUDOCODE - BACKTRACKING SEARCH
+	backtracking_search(csp)
+		backtrack({},csp)
+
+	backtrack(assignment,csp)
+		if(isComplete(assignment))
+			return assignment
+		var = unassigned variable in csp
+		foreach value in domain
+			if value is consistent with assignment
+				add var=value to assignment
+				inferences = inference(csp, var, value)		//some k consistency
+				if (inferences != failure)
+					add inferences to assignment
+					result = backtrack(assignment, csp)
+					if(result != failure)
+						return result
+			remove var=value and inferences from assignment
+		return failure
+
+What order should we choose variables and values?
+	When selecting an unassigned variable, it is most efficient to choose the one with the fewest legal values left. This is the "minimum remaining values" heuristic, or the most-constrained variable heuristic, or the fail-first heuristic.
+	If X has no values left, it will be chosen first and failure will be detected immediately.
+
+	But when all domains are initially the same, we should use the "degree heuristic"--select the variable with the largest number of constraints.
+
+	Once we have our variable, we should choose the "least constraining value", the one that rules out the fewest choices in neighbors.
+
+Forward Checkiong
+	AC-3 is great for inferring reductions before we make a search.
+	But "forward checking" is a better form of inference during a search.
+	Once a variable X is assigned a value, for every unassigned variable Y connected to X, delete from Y any value that is inconsistent with X's value.
+	We determine arc consistency during the search, and thus arc consistency as a preprocessing step is unnecessary.
+
+	Forward checking makes sure our current variable is arc-consistent, but doesn't look ahead to see if other variables are arc consistent.
+	The Maintaining Arc Consistency algorithm calls AC-3 at inference, with queue set to the arcs connecting unassigned variables to our current one. It's more powerful, but involves recursion.
+
+
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+CONSTRAINT SATISFACTION
+
+Before, states were atomic with no indivisible structure.
+Now we will use "factored representation" of state, where each state has variables.
+A problem is solved when all constraints are satisfied, when all variables reach certain values.
+
+	X is the set of variables: {X1, X2, ... Xn}
+	D is the set of domains: {D1, D2, ... Dn}, one for each variable
+		The set of values the variable can take
+	C is the set of constraints that specify allowable combinations of variable values.
+		<scope, relation>
+		scope is a tuple variables involved
+		relation is the values they can take in relation to each other, a list of valid tuples
+
+Each state is called an "assignment" of values to variables.
+It is "consistent" if it doesn't violate constraints.
+It is "complete" if it has values for every variable, "partial" otherwise.
+
+Map Coloring
+	We want to color a map, giving each country the color red green or blue, without adjacent countries having the same color.
+
+	Variables: Countries
+	Domain: red, green, blue
+	Constraint:	<adjacent countries, colors don't match>
+
+	For this problem it would be helpful to create a "constraint graph", where nodes of the graph are variables, and a link between the variables shows a constraint that they can't be equal.
+
+	With Constraint Satisfaction Problems if a partial assignments violates a constraint, we can discard all other refinements of the partial assignment, greatly reducing the amount of states we have to look at.
+
+Job Shop Scheduling	
+	Variables: Tasks that must be done - T (and the time it takes to do them - d)
+	Domain: the time the tasks are done
+	Constraint: some tasks must happen before each other, some tasks can't happen at the same time
+
+	precedence constraints	T1 + d1 <= T2
+	disjunctive constraints	T1 + d1 <= T2 OR T2 + d2 <= T1
+
+Types of Constraints
+	A unary constraint involves one variable, i.e. Variable 1 can't be Blue
+	A binary constraint involves two variables, i.e. Variable 1 can't equal Variable 2
+	A global constraint involves n variables
+
+	A constraint hypergraph is a graph where variables are nodes and global constraints are hypernodes that the involved variables connect to.
+	A dual graph is where all global constraints are reduced to binary constraints.
+
+	So far we have discussed absolute constraints. There are also preference constraints, where costs are assigned based on preference, and we solve with a constraint optimizaion problem.

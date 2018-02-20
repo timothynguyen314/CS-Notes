@@ -6,11 +6,10 @@ TABLE OF CONTENTS
 	1-search
 	\
 		1-the_problem
-		2-example_problems
-		3-uninformed_search
-		4-informed_search
-		5-heuristics
-		6-local_search
+		2-uninformed_search
+		3-informed_search
+		4-heuristics
+		5-local_search
 	2-game_playing
 	\
 		1-games
@@ -19,4 +18,9 @@ TABLE OF CONTENTS
 		4-imperfect_real_time_decisions
 		5-stochastic_games
 	3-constraint_satisfaction
+	\
+		1-constraint_satisfaction
+		2-constraint_propagation
+		3-backtracking_search
+		4-problem_structure
 	4-propositional_logic

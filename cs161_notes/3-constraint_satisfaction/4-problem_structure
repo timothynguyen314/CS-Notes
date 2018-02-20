@@ -1,0 +1,34 @@
+STRUCTURE OF PROBLEM
+
+Independent Subproblems have no effect on each other--they are separate connected components.
+If each component has c variables, then there are n/c subproblems, each which take d^c work.
+O(d^c n/c) as opposed to O(d^n)
+
+If our constraint graph is a tree, we can solve it in linear time with respect to variables.
+A CSP has directed arc consistency if we have an ordering of variables X1,...,Xn st Xi is consistent with Xj for all j>i
+Find this ordering via topological sort - O(nd^2)
+No backtracking is necessary, and it is thus linear.
+
+PSEUDOCODE
+	tree_csp_solver(csp)
+		n = # of variables in X
+		assignment = {}
+		root = any variable in X
+		X = topological_sort(X,root)
+		for(j=n; j>1; j--)
+			make_arc_consistent(parent(Xj),Xj)
+			if unable
+				return failure
+		for(i=1; i<=n; i++)
+			assignment[Xi] = any consistent value from Di
+			if unable
+				return failure
+		return assignment
+
+Now can we turn any problem into a tree?
+
+Cutset Conditioning
+	Choose a subset S such that the CSP becomes a tree after the removal of S--S is the cycle cutset
+	For all possible values in S, remove respective inconsistent values from the tree and see if the tree works, and if so we have a solution.
+
+	If the cycle cutset has size c, we have O(d^c * (n-c)d^2)

@@ -15,5 +15,5 @@ A game is a search with the following properties:
 	Terminal-Test - Has the game reached a terminal state, meaning is it over?
 	Utility - A utility function (objective function) defines the numeric values at each terminal state (e.g. 1-win, 0-loss, 1/2-draw). Zero-sum means the sum of both sides is always this same (1 in the example).
 
-We now have our game tree.
+We now have our GAME tree.
 	

@@ -1,0 +1,60 @@
+CONSTRAINT PROPAGATION
+
+Constraint propagation is a type of inference that uses constraints to reduce the number of legal values for a variable.
+The key idea is to achieve local consistency, where variables are nodes and binary constraints are arcs.
+
+Node Consistency
+	Make sure the domain of each variable satisfies all the unary constraints.
+	If a variable can't equal red, take red out of its domain.
+Arc Consistency
+	Make sure the domain of each variable satisfies all the binary constraints.
+	A variable X is arc consistent with variable Y if for every variable in its domain, there is a variable in Y's domain that satisifies their binary constraint.
+	We want every variable to be arc consistent with every variable.
+
+	<(X,Y), {(0,0), (1,1), (2,4), (3,9)}> is made arc consistent when
+	X domain = 0,1,2,3
+	Y domain = 0,1,4,9
+
+	Most popular algorithm for ensuring arc consistency: AC-3, described below.
+	Complexity
+		Suppose there are n variables, domains with max size d, and c arcs.
+		Each of the c arcs can be inserted into the queue at most d times - O(cd)
+		Each revise takes O(d^2) time.
+		O(cd^3)
+
+PSEUDOCODE - AC-3
+	queue = all arcs in csp
+	AC-3(csp)	//csp takes form {X, D, C}
+		while(!empty(queue))
+			(Xi, Xj) = queue.pop()
+			if(revise(csp, Xi, Xj))
+				if(size(Di) == 0)
+					return false
+				foreach Xk in Xi.neighbors - Xj
+					queue.push(Xk,Xi)
+		return true
+	revise(csp, Xi, Xj)
+		revised = false
+		foreach x in Di
+			if no value y in Dj allows (x,y) to satisfy the constraint between Xi and Xj
+				delete x from Di
+				revised = true
+		return revised
+
+Path Consistency
+	{Xi, Xj} is path consistent with Xk if,
+	for every assignment consistent with the constraints on {Xi, Xj},
+	there is an assignment with the constraints on {Xi, Xk} and {Xk, Xj}
+
+	For example, arc consistency fails in the map problem when there is only red and blue.
+	All arcs can be satisfied, but we need to check each arc with the other variables.
+K Consistency
+	A CSP is k consistent if for any set of k-1 variables, for any consistent assignment to those variables, a consistent one exists for the kth one.
+	node consistency is 1-consistency
+	arc consistency is 2-consistency
+	path consistency is 3-consistency on binary constraint networks
+
+	A CSP is strongly k consistent if it is 1-consistent, 2-consistent, ..., k-consistent
+
+	Once you find strongly n consistency for a CSP with n variables, you can find a solution in O(n^2 d)
+	But finding n-consistency takes a lot of time and space, which is why it is efficient to stick with 2-consistency and less commonly 3-consistency.
