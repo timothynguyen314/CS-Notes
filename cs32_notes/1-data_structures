@@ -1,0 +1,54 @@
+DATA STRUCTURES
+
+vector
+	Insert in top/middle	O(n)
+	Insert at end			O(1)
+	Delete from top/middle	O(n)
+	Delete from end			O(1)
+	Access 					O(1)
+	Find 					O(n)
+
+list
+	Inserting				O(1)
+	Deleting				O(1)
+	Accessing top/bottom	O(1)
+	Accessing middle		O(n)
+	Finding					O(n)
+
+set
+	Insert 					O(log2n)
+	Find 					O(log2n)
+	Delete 					O(log2n)
+
+map
+	Insert 					O(log2n)
+	Find 					O(log2n)
+	Delete					O(log2n)
+
+queue/stack
+	Insert 					O(1)
+	Pop						O(1)
+	Examining top 			O(1)
+
+hash table
+	A hash function converts a value to a unique bucket number.
+	The bucket is a linked list in case values get the same hash value.
+	If we have few collisions, inserting and finding are O(1)
+
+	If the table is full, inserting and finding is O(n)
+
+	Fast searches vs Wasting Memory
+
+BST
+	Tree where left child is always less than, and right child is always greater than
+	Inserting and Finding is O(log2n)
+
+	Doesn't waste space, unlike hash table
+	More complex to implement, unlike hash table
+	Sorted, unlike hash table
+	Unlimited size, or at least size does not affect performance, unlike hash table
+
+Heap
+	Maxheap - Tree where children are always lesser
+	Minheap - Tree where children are always greater
+	Inserting and Extracting is O(log2n)

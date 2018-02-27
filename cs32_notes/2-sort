@@ -1,0 +1,52 @@
+SORTING
+
+Selection Sort
+	Look at n. Swap smallest with first.
+	Look at last n-1. Swap smallest with first.
+	Look at last n-2. Swap smallest with first.
+	...
+	O(n^2) always
+
+Insertion Sort
+	Sort first two by comparing
+	Sort first three by continually comparing last one
+	Sort first four by continually comparing last one
+	...
+	O(n^2)
+
+	O(n) for mostly sorted arrays
+
+Bubble Sort
+	Go through List, two at a time
+	If any are out of order, swap them
+	If you had to make at least one swap, try again
+	...
+	O(n^2)
+
+	O(n) for mostly sorted arrays
+
+Shell Sort
+	Based on h sorting, where if
+	A[i] and A[i+h] are out of order, swap them
+	If you had to make at least one swap, try again
+	Bubble Sort is basically 1-sort
+
+	Shell sort is where you do a decreasing sequence of h, ending with a 1-sort
+	O(n^1.25) on average
+
+Quick Sort
+	If array has 0 or one element return
+	Select arbitrary element (typically first), move all less than P to left and all greater than P to right
+	Recursively repeat on left and right subarrays
+
+	O(nlogn) on average, unless list already mostly sorted or in reverse order, where we get O(n^2)
+
+Merge Sort
+	If array has one element return
+	Recursively split array into two equal sections
+	Then merge together
+
+	O(nlogn) always, but requires making secondary arrays, which can be a space issue, while quick sort doesn't
+
+Heap Sort
+	O(nlogn) always 
