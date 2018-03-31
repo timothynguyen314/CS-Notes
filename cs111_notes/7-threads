@@ -1,0 +1,11 @@
+THREADS
+
+What is a thread?
+	Threads run within the same process.
+	Threads have their own stack, PC, and registers.
+	Threads share the same address space/page table, unlike processes.
+
+	You never know what thread is currently running.
+	You can call join() to wait for all children to finish before resuming.
+
+	Parallelism improves throughput, modularity (breaking up a task into pieces), and robustness (a failure of one task does not affect others).

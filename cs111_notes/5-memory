@@ -1,0 +1,36 @@
+MEMORY
+
+Virtual Address Space
+	Virtual Address Spaces only contain the memory of processes, and does not contain the OS.
+	The total memory of all processes exceeds the capacity of the physical address space.
+	The physical address space is also hard to understand, so we must virtualize it.
+Heap
+	The heap is represented as a "free list".
+	Problems
+		External Fragmentation
+			Having no room for a unit, but the combination of total free space exceeds the size of the unit
+		Internal Fragmentation
+			Allocating too much space for a unit
+	Strategies
+		Best Fit
+			Find all sizes that fit, choose the smallest one.
+			Leads to external fragmentation.
+		Worst Fit
+			Find all sizes that fit, choose the biggest one.
+			Takes too much time to find all sizes that fit.
+		First Fit
+			Find the first size that fits.
+			Pollutes the beginning of the list.
+		Next Fit
+			Find the next fit after the first search.
+
+		Segregated Lists/Buffer Pools
+			If a certain size is repeatedly request, make a list just for it.
+			This reduces fragmentation.
+		Buddy Allocation
+			Continually "split" list in half until you find a size that fits.
+			Continually "coalesce" halves when you free space.
+	Garbage Collection
+		Sometimes programming languages use a garbage collector instead of freeing dynamically allocated data manually.
+		It keeps track of all references to every object.
+		When the number of references reaches zero, it frees the object.

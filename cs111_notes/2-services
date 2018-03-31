@@ -1,0 +1,39 @@
+SERVICES
+
+Interfaces
+	The interface of a service is a contract of promised functionality.
+	It encapsulates the implementation, which should be able to change--interface should never rely on implementation.
+	We want to maintain upward compatibility, so that our interface will still work with older versions.
+		Highly abstract your interface.
+		Include features you won't implement until the future.
+		Try to avoid functionality between components.
+Subroutines
+	These are like function calls.
+	You push parameters, jump to the subroutine, and the return values are found in stack registers.
+	All subroutines are the same address space, and all only have a standard instruction set.
+	Libraries
+		Static Libraries
+			Link Time
+			We put the entire library in, which can be large.
+			And changing the library means having to relink it into the load module.
+		Shared Libraries
+			Exec Time
+			All programs will share one library.
+			Can be updated without updating programs.
+		Dynamic Libraries
+			Run Time
+			We only use the parts of the library we need.
+			This is useful if the library is large or if the called routines have yet to be implemented.
+			Unlike the previous libraries which are called through APIs, DLLs are called through ABIs.
+System Calls
+	These are 100-1000x slower than subroutines.
+	They force entry into the kernel, where we can do all the priveleged things an OS can do.
+	Traps/Interrupts
+		Traps are caused by the OS, synchronous.
+		Interrupts are caused by the hardware, asynchronous.
+
+		We use traps to make system calls and go into kernel mode.
+		Registers will be saved onto a kernel stack.
+		A trap table holds indices of traps, and each call a trap handler.
+
+		Going into kernel mode clears cache.

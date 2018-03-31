@@ -1,0 +1,35 @@
+THE PROCESS
+
+What is the process?
+	A process is an object with state/operations.
+	It is an executing instance of a program.
+	Memory Layout
+		Code
+			Statically sized.
+			Read in from the load module.
+			Read/execute only.
+			Shareable with other processes.
+		Data
+			Grows up from beginning.
+			Dynamically allocated by user.
+			Read/write only.
+			Private to each process.
+		Stack
+			Grows down from end.
+			Grows with function calls.
+			Read/write only.
+			Private to each process.
+	Processes are run on the CPU with limited direct execution:
+		They are run directly on the CPU for efficiency
+		They are given limited access (CPU has user and kernel mode)
+How is a process made?
+	fork()
+		Windows will create processes from scratch.
+		Linux/Unix will create processes by copying from the current process.
+
+		Each process shares code, but get their own data and stack.
+		Each process has its own virtual address space.
+	executable
+		Source modules are compiled into object modules.
+		Object modules are linked into load modules.
+		Load modules are loaded into memory to be executed.

@@ -1,0 +1,38 @@
+SWAPPING
+
+Paging
+	Physical memory is divided into fix sized pieces called page frames.
+	Virtual memory is also divided into pages.
+	A page table provides translations between physical pages and virtual pages.
+	The Memory Management Unit (MMU) (part of CPU) takes care of this.
+Swapping
+	Virtual address space is larger than the physical address space.
+	When we use up all the space on RAM, we keep the rest on disk.
+	We swap pages out as they are used to maintain the illusion that virtual memory is large.
+
+	Translation Lookaside Buffer (TLB):
+		It is expensive to have to have to find a page on the disk.
+		We use the TLB, a cache, that we search before grabbing from disk.
+		A TLB miss means we have a "page fault", and we have to find it on the disk while also placing it in the TLB for future TLB hits.
+		We use temporal and spatial locality to determine what to put in the TLB.
+
+	Policies
+		How do we determine what to kick out of memory?
+
+		First In First Out (FIFO)
+			This is bad as it does not take into account that some pages are used much more than others.
+		Least Frequently/Recently Used (LFU/LRU)
+			This is the ideal algorithm.
+			But maintaining a data structures of access times and having to search these structures is a problem.
+		Clock Alogrithm
+			We arrange pages a circle.
+			We mark the dirty bit as modified whenever pages are used.
+			A clock hand will check the dirty bit:
+				Resets if modified
+				Kicks out to disk if clean
+			Moves to the next page in the circle.
+		Working Sets
+			When we have multiple processes, we don't want to reset all pages after each context switch.
+			A global pool doesn't work because processes rarely use the same pages.
+			A fixed allocation for each process doesn't work because processes use different number of pages.
+			Working sets means every process gets a dynamic number of pages that changes based on observed history of page fault rates, and stealing from processes that don't page often.

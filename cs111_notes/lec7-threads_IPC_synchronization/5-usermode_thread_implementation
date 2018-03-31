@@ -1,8 +1,0 @@
-USER MODE THREAD IMPLEMENTATION
-
-Processes are expensive. And they can't share in-memory resources w each other.
-When threads were first introduced in Linux, they were entirely implemented in the user mode library w no OS involvement.
-
-However, because there is no OS involvement, if a thread blocks, the entire process is blocked.
-And the OS cannot know to run threads on multiple processors.
-And thus threads should be implemented in the OS.

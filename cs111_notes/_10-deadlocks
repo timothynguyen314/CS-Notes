@@ -1,0 +1,14 @@
+DEADLOCKS
+
+Deadlock Conditions
+	Mutual Exclusion
+		There exists critical sections that require locks.
+		Can be fixed by making the critical section atomic, performed a single operation, so that no lock is necessary.
+	Incremental Allocation (Hold-And-Wait)
+		A thread/process holds resources from one critical section while waiting for another critical section.
+		Can be fixed by making acquiring resources all-or-none.
+	No Preemption
+		We are unable to preempt threads/processes with locks.
+	Circular Waiting
+		There is a cycle in the dependency graph of resource requests.
+		Can be fixed by having a "total ordering" for all resources.

@@ -1,0 +1,45 @@
+SCHEDULING
+
+Metrics
+	Scheduling is determining which processes go on the CPU in what order and for how long to optimize various metrics:
+		Turnaround time - average time from arrival to completion, associated with throughput
+		Response time - average time from arrival to first scheduling, associated with fairness
+		Throughput - processes/second
+		Fairness - no process faces starvation
+Non-Preemptive Scheduling
+	Nonpreemptive scheduling lets processes run to completion before going to next process.
+	Used in realtime systems where hard deadlines are important--it is thus important to set up a schedule beforehand that ensures that no preemption is necessary.
+	Used in systems where the main priority is simply throughput or merely getting jobs done.
+
+	Examples:
+		First-In First-Out (FIFO)
+			Fairly simple to implement. Good if jobs are brief.
+			Really bad if a really big job comes first -- the convoy effect.
+		Shortest Job First (SJF)
+			Fixes convoy effect if big and small jobs come at the same time.
+			Doesn't fix the convoy effect if the big job comes right before the small job.
+Preemptive Scheduling
+	Preemptive scheduling means allowing interrupts to cause context switches between processes.
+	Cache is cleared between context switches.
+	Used to ensure fairness.
+
+	Examples:
+		Shortest Time to Completion First (STCF)
+			If a short job arrives during a big job, we can preempt to change.
+			Big jobs could face starvation, however, and thus has terrible response time.
+			Lastly, we usually don't know the runtimes of processes beforehand.
+		Round Robin (RR)
+			Run a job for a time slice, then switch to next job.
+			Good response time, but terrible turnaround time.
+		Multi-Level Feedback Queue (MLFQ)
+			Different queues of varying priorities
+			Each queue runs Rouund Robin
+			Run the highest priority queue
+
+			Processes either running, waiting to run, or waiting for resources.
+			Each process will give up the CPU to use I/O at some point.
+			If it does not give up the CPU for I/O at the end of its time-slice, push it down a priority queue.
+			This can lead to starvation of long jobs and also to "gaming of the scheduler" where processes cheat by giving up the CPU at just the right time.
+
+			Instead, after a certain time slice, we should boost all processes in priority so that they get a chance to run again.
+			And we should also account for total CPU time in a queue to determine priority and avoid gaming of the scheduler.

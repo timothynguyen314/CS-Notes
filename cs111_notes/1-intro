@@ -1,0 +1,25 @@
+INTRO TO OPERATING SYSTEMS
+
+What does the OS do?
+	The OS abstracts the hardware.
+		Memory Management
+		Scheduling of Processes
+		File Systems
+		Security of Resources
+		Network Protocol
+
+	Applications -> Libraries -> OS -> Hardware
+	
+	Applications interact with Libraries through the Application Binary Interface.
+	Libraries interact with the OS through the System Call Interface.
+
+	Applications and Libraries possess a standard instruction set.
+	The OS possesses a priveleged instruction set.
+
+	ISA
+		The Instruction Set Architecture determines what bit patterns correspond to what operations.
+		An OS wants to run on as many ISAs as possible, on as many different machines.
+	API/ABI
+		Application Programming Interfaces (API) are used by programmers. It describes routines, parameters, options, errors, return values, etc.
+		Application Binary Interfaces (ABI) are machine language instructions. It is the binding of an API to an ISA.
+		APIs/ABIs are OS specific, while an ISA is hardware specific.

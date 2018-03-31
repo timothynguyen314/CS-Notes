@@ -4,74 +4,14 @@ CS 111 - Operating Systems Principles
 These are the notes of Tim Nguyen for CS 111: Operating Systems Principles, taught by Peter Reiher at UCLA in Winter 2018.
 
 TABLE OF CONTENTS
-	lec1-intro
-	\
-		1-intro_os
-		2-more_intro
-		3-os_principles
-
-	lec2-services_resources_interface
-	\
-		1-services_resources_interface
-		2-interface_stability
-		3-interface_standards
-
-	lec3-processes_execution_state
-	\
-		1-processes_execution_state
-		2-process
-		3-process_API
-		4-limited_direct_execution
-		5-linking_libraries
-		6-linking_conventions
-
-	lec4-scheduling
-	\
-		1-scheduling
-		2-more_scheduling
-		3-multilevel_feedback_queue
-		4-realtime_scheduling
-
-	lec5-memory_management
-	\
-		1-memory_management
-		2-address_spaces
-		3-memory_API
-		4-free_space_management
-		5-garbage_collection
-
-	lec6-swap_page_vm
-	\
-		1-swap_page_vm
-		2-paging
-		3-tlb
-		4-mechanisms
-		5-policies
-		6-working_sets
-
-	lec7-threads_IPC_synchronization
-	\
-		1-threads_IPC_synchronization
-		2-concurrency
-		3-thread_API
-		4-interprocess_communication
-		5-usermode_thread_implementation
-
-	lec8-mutex_asynchronous-completion
-	\
-		1-mutex_asynchronous-completion
-		2-locks
-		3-condition_variables
-
-	lec9-semaphores
-	\
-		1-semaphores_synchronization
-		2-lock_based_concurrent_data_structures
-		3-semaphores
-
-	lec10-deadlocks
-	\
-		1-deadlocks
-		2-concurrency_problems
-		3-deadlock_avoidance
-		4-health_monitoring_and_recovery
+\
+	1-intro
+	2-services
+	3-process
+	4-scheduling
+	5-memory
+	6-swap
+	7-threads
+	8-locks
+	9-semaphores
+	10-deadlocks

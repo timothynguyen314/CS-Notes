@@ -1,0 +1,31 @@
+SEMAPHORES
+
+Semaphores
+	Consists of a queue and a counter.
+	wait()
+		decrements counter, if negative push onto queue
+	post()
+		increments counter, if non-negative pop from queue
+	Used to implement locks.
+
+	Bounded Buffer (aka Producer/Consumer)
+		Producers puts stuff into buffer until it is full.
+		Consumers take from buffer until it is empty.
+		Race Condition when producer writes to the ith position, but is interrupted in the middle of writing, and another producer writes to the same position.
+	Priority Inversion
+		P1 and P3 need a lock for a critical section.
+		P2 does not.
+
+		P3 acquires lock.
+		P2 interrupts P3.
+		P1 can not run because P3 still has lock.
+		P3 can not run because P2 has higher priority.
+
+		"priority inheritance" ensures that P3 cannot be interrupted if it has a lock.
+		"watchdog timer" resets system if P1 does not run for a long time.
+	Dining Philosophers
+		Philosophers are arranged in a circle with forks between them.
+		Each philosopher grabs the left then right fork before giving up forks.
+
+		If all philosophers grab the left fork, none can grab a right fork before giving up forks: deadlock.
+		Solution is to have one philosopher grab right fork first.

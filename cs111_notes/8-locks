@@ -1,0 +1,18 @@
+LOCKS
+
+Synchronization
+	Critical Section
+		Mutual exclusion is needed for the critical section in shared resources to ensure that multiple threads/processes aren't accessing/updating it at the same time.
+	Race Condition
+		The outcome depends the order of execution, which is non-deterministic, and thus needs.
+Locks
+	A thread must acquire a lock before accessing the critical section.
+	All other threads waiting to enter the critical section must wait.
+		The thread in possession of the lock can disable interrupts, but this gives each thread a priveleged operation, and it can take control of the CPU.
+		The waiting threads can spin in a loop, which is wasteful of CPU cycles--unless the # of threads = # of processors.
+		The waiting threads can call yield() to switch to the next thread. They should then be placed in a queue to ensure no thread goes into starvation.
+	A coarse-grained strategy uses a lock for all critical sections.
+	A fine-grained strategy uses a lock for each critical section.
+Condition Variables
+	wait() - a thread goes to sleep
+	signal() - a thread meets a condition and wakes up a sleeping thread
