@@ -49,4 +49,6 @@ Merge Sort
 	O(nlogn) always, but requires making secondary arrays, which can be a space issue, while quick sort doesn't
 
 Heap Sort
+	Insert array into a maxheap
+	Continually remove biggest value
 	O(nlogn) always 

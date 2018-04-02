@@ -1,0 +1,18 @@
+Encapsulation
+	public		- accessible by anyone
+	private		- accessible by this class only
+	protected	- accessible by this and derived classes only
+
+Inheritance
+	You can create a subclass from a base class.
+	You can extend behavior by adding new members.
+	You can specialize behavior by redefining members.
+		Use virtual functions in the base class if they will be redefined in derived class
+		Use pure virtual functions to make an abstract base class that can have no instances.
+		Always make destructors virtual (due to polymorphism)
+
+	Base constructed first.
+	Base destructed last.
+
+Polymorphism
+	You can use a base pointer to access any variable of a derived class

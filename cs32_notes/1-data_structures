@@ -43,12 +43,17 @@ BST
 	Tree where left child is always less than, and right child is always greater than
 	Inserting and Finding is O(log2n)
 
+	Deleting a node with two children - replace with either left's largest or right's smallest
+
 	Doesn't waste space, unlike hash table
 	More complex to implement, unlike hash table
 	Sorted, unlike hash table
 	Unlimited size, or at least size does not affect performance, unlike hash table
 
 Heap
-	Maxheap - Tree where children are always lesser
-	Minheap - Tree where children are always greater
+	Maxheap - Complete Binary Tree where parents are always greater than children
+	Minheap - Complete Binary Tree where parents are always lesser than children
+
+	Insert at bottom most left position and continually swap with parents until in place
+
 	Inserting and Extracting is O(log2n)
